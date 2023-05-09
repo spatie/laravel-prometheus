@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Spatie\Prometheus\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class PrometheusCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-prometheus';
 
     public $description = 'My command';
 
