@@ -6,9 +6,9 @@ use Illuminate\Console\Command;
 
 class PrometheusCommand extends Command
 {
-    public $signature = 'laravel-prometheus';
+    public $signature = 'prometheus:list-collectors';
 
-    public $description = 'My command';
+    public $description = 'List all collectors registered to Prometheus';
 
     public function handle(): int
     {
