@@ -16,5 +16,5 @@ return [
 
     'actions' => [
         'render_collectors' => Spatie\Prometheus\Actions\RenderCollectorsAction::class,
-    ]
+    ],
 ];

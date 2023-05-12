@@ -3,7 +3,6 @@
 namespace Spatie\Prometheus\Collectors;
 
 use Prometheus\CollectorRegistry;
-use Prometheus\Gauge as PrometheusGauge;
 
 interface Collector
 {
