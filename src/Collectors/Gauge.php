@@ -15,8 +15,7 @@ class Gauge implements Collector
         protected ?string $name = null,
         protected ?string $namespace = null,
         protected ?string $helpText = null,
-    )
-    {
+    ) {
         $this->name = $name ?? Str::slug($this->label, '_');
 
         $this->namespace = Str::of(App::getNamespace())->slug()->lower();
