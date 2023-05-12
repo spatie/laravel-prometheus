@@ -13,13 +13,13 @@ class Prometheus
 
     public function addGauge(
         string $label,
+        null|float|callable $value = null,
         ?string $name = null,
         ?string $namespace = null,
         ?string $helpText = null,
-        mixed $value = null,
     ): Gauge
     {
-        $collector = new Gauge($label, $name, $namespace, $helpText, $value);
+        $collector = new Gauge($label, $value, $name, $namespace, $helpText);
 
         $this->registerCollector($collector);
 

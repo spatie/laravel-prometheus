@@ -11,7 +11,7 @@ return [
     ],
 
     'middleware' => [
-        Spatie\Prometheus\Middleware\AllowIps::class,
+        \Spatie\Prometheus\Http\Middleware\AllowIps::class,
     ],
 
     'actions' => [

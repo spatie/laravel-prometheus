@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Prometheus\Middleware;
+namespace Spatie\Prometheus\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
@@ -10,7 +10,11 @@ class AllowIps
 {
     public function handle(Request $request, Closure $next)
     {
-        $allowedIps = config('horizon-exporter.ip_whitelist');
+        $allowedIps = config('horizon-exporter.ip_whitelist', []);
+
+        if (! count($allowedIps)) {
+            return $next($request);
+        }
 
         if (IpUtils::checkIp($request->ip(), $allowedIps)) {
             return $next($request);

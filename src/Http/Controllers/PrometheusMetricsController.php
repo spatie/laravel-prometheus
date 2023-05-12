@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Prometheus\Controllers;
+namespace Spatie\Prometheus\Http\Controllers;
 
 use Prometheus\RenderTextFormat;
 use Spatie\Prometheus\Prometheus;

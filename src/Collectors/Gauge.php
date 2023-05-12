@@ -2,6 +2,7 @@
 
 namespace Spatie\Prometheus\Collectors;
 
+use Closure;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 use Prometheus\CollectorRegistry;
@@ -10,15 +11,15 @@ class Gauge implements Collector
 {
     public function __construct(
         protected string $label,
+        protected null|float|Closure $value = null,
         protected ?string $name = null,
         protected ?string $namespace = null,
         protected ?string $helpText = null,
-        protected mixed $value = null,
     )
     {
         $this->name = $name ?? Str::slug($this->label, '_');
 
-        $this->namespace = strtolower(App::getNamespace());
+        $this->namespace = Str::of(App::getNamespace())->slug()->lower();
     }
 
     public function namespace(string $namespace): self
@@ -42,7 +43,7 @@ class Gauge implements Collector
         return $this;
     }
 
-    public function value(mixed $value): self
+    public function value(float|Closure $value): self
     {
         $this->value = $value;
 
@@ -54,7 +55,7 @@ class Gauge implements Collector
         $gauge = $registry->getOrRegisterGauge(
             $this->namespace,
             $this->name,
-            $this->helpText,
+            $this->helpText ?? '',
         );
 
         $gauge->set(value($this->value));
