@@ -2,14 +2,12 @@
 
 namespace Spatie\Prometheus;
 
+use Illuminate\Support\Facades\Route;
 use Prometheus\CollectorRegistry;
 use Prometheus\Storage\InMemory;
-use Spatie\Health\Health;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Spatie\Prometheus\Commands\PrometheusCommand;
 use Spatie\Prometheus\Controllers\PrometheusMetricsController;
-use \Illuminate\Support\Facades\Route;
 use Spatie\Prometheus\Middleware\AllowIps;
 
 class PrometheusServiceProvider extends PackageServiceProvider
@@ -26,7 +24,7 @@ class PrometheusServiceProvider extends PackageServiceProvider
         $this->app->scoped(Prometheus::class);
         $this->app->alias(Prometheus::class, 'prometheus');
 
-        $this->app->scoped(CollectorRegistry::class, function() {
+        $this->app->scoped(CollectorRegistry::class, function () {
             return new CollectorRegistry(new InMemory());
         });
     }

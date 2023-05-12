@@ -17,8 +17,7 @@ class Prometheus
         ?string $namespace = null,
         ?string $helpText = null,
         mixed $value = null,
-    ): Gauge
-    {
+    ): Gauge {
         $collector = new Gauge($label, $name, $namespace, $helpText, $value);
 
         $this->registerCollector($collector);
