@@ -28,3 +28,7 @@ it('can render a gauge with all options', function () {
 
     assertPrometheusResultsMatchesSnapshot();
 });
+
+it('will not fail with no metric types registered', function() {
+    assertPrometheusResultsMatchesSnapshot();
+});
