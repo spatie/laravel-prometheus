@@ -10,13 +10,13 @@ it('can render a simple gauge', closure: function () {
     assertPrometheusResultsMatchesSnapshot();
 });
 
-it('can render a gauge with a plain value', closure: function() {
+it('can render a gauge with a plain value', closure: function () {
     Prometheus::addGauge('my gauge', 123.45);
 
     assertPrometheusResultsMatchesSnapshot();
 });
 
-it('can render a gauge with all options', function() {
+it('can render a gauge with all options', function () {
     /** @var \Spatie\Prometheus\MetricTypes\Gauge $gauge */
     $gauge = Prometheus::addGauge('my gauge');
 

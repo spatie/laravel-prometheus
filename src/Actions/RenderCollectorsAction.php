@@ -4,7 +4,6 @@ namespace Spatie\Prometheus\Actions;
 
 use Prometheus\CollectorRegistry;
 use Prometheus\RenderTextFormat;
-use Spatie\Prometheus\MetricTypes\Metric;
 use Spatie\Prometheus\MetricTypes\MetricType;
 
 class RenderCollectorsAction
