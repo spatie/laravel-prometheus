@@ -1,13 +1,13 @@
 <?php
 
-namespace Spatie\Prometheus\Collectors;
+namespace Spatie\Prometheus\MetricTypes;
 
 use Closure;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 use Prometheus\CollectorRegistry;
 
-class Gauge implements Collector
+class Gauge implements MetricType
 {
     public function __construct(
         protected string $label,

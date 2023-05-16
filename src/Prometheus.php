@@ -3,13 +3,14 @@
 namespace Spatie\Prometheus;
 
 use Spatie\Prometheus\Actions\RenderCollectorsAction;
-use Spatie\Prometheus\Collectors\Collector;
-use Spatie\Prometheus\Collectors\Gauge;
+use Spatie\Prometheus\MetricTypes\Metric;
+use Spatie\Prometheus\MetricTypes\Gauge;
+use Spatie\Prometheus\MetricTypes\MetricType;
 
 class Prometheus
 {
-    /** @var array<\Spatie\Prometheus\Collectors\Collector> */
-    protected array $collectors;
+    /** @var array<\Spatie\Prometheus\MetricTypes\MetricType> */
+    protected array $metrics;
 
     public function addGauge(
         string $label,
@@ -25,9 +26,9 @@ class Prometheus
         return $collector;
     }
 
-    public function registerCollector(Collector $collector): self
+    public function registerCollector(MetricType $collector): self
     {
-        $this->collectors[] = $collector;
+        $this->metrics[] = $collector;
 
         return $this;
 
@@ -35,6 +36,6 @@ class Prometheus
 
     public function renderCollectors(): string
     {
-        return app(RenderCollectorsAction::class)->execute($this->collectors);
+        return app(RenderCollectorsAction::class)->execute($this->metrics);
     }
 }

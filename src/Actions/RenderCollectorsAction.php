@@ -4,7 +4,8 @@ namespace Spatie\Prometheus\Actions;
 
 use Prometheus\CollectorRegistry;
 use Prometheus\RenderTextFormat;
-use Spatie\Prometheus\Collectors\Collector;
+use Spatie\Prometheus\MetricTypes\Metric;
+use Spatie\Prometheus\MetricTypes\MetricType;
 
 class RenderCollectorsAction
 {
@@ -15,7 +16,7 @@ class RenderCollectorsAction
     public function execute(array $collectors): string
     {
         collect($collectors)
-            ->each(fn (Collector $gauge) => $gauge->register($this->registry));
+            ->each(fn (MetricType $gauge) => $gauge->register($this->registry));
 
         return $this->renderRegistry();
     }
@@ -24,6 +25,10 @@ class RenderCollectorsAction
     {
         $renderer = new RenderTextFormat();
 
-        return $renderer->render($this->registry->getMetricFamilySamples());
+        $result = $renderer->render($this->registry->getMetricFamilySamples());
+
+        $this->registry->wipeStorage();
+
+        return $result;
     }
 }
