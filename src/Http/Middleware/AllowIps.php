@@ -10,7 +10,7 @@ class AllowIps
 {
     public function handle(Request $request, Closure $next)
     {
-        $allowedIps = config('horizon-exporter.ip_whitelist', []);
+        $allowedIps = config('prometheus.allowed_ips', []);
 
         if (! count($allowedIps)) {
             return $next($request);

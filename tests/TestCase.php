@@ -24,13 +24,12 @@ class TestCase extends Orchestra
         ];
     }
 
-    public function getEnvironmentSetUp($app)
+    public function usingIp(?string $ip): self
     {
-        config()->set('database.default', 'testing');
+        if (! $ip) {
+            return $this;
+        }
 
-        /*
-        $migration = include __DIR__.'/../database/migrations/create_laravel-prometheus_table.php.stub';
-        $migration->up();
-        */
+        return $this->withServerVariables(['REMOTE_ADDR' => $ip]);
     }
 }

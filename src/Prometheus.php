@@ -10,7 +10,7 @@ use Spatie\Prometheus\MetricTypes\MetricType;
 class Prometheus
 {
     /** @var array<\Spatie\Prometheus\MetricTypes\MetricType> */
-    protected array $metrics;
+    protected array $metrics = [];
 
     public function addGauge(
         string $label,
