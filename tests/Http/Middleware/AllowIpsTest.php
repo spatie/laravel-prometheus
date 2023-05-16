@@ -26,5 +26,4 @@ it('it can allow only certain ips', function (string|null $ip, bool $allowed) {
     ['1.2.3.4.5', false],
     ['2.3.4.5', false],
 
-
 ]);
