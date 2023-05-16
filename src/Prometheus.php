@@ -3,7 +3,6 @@
 namespace Spatie\Prometheus;
 
 use Spatie\Prometheus\Actions\RenderCollectorsAction;
-use Spatie\Prometheus\MetricTypes\Metric;
 use Spatie\Prometheus\MetricTypes\Gauge;
 use Spatie\Prometheus\MetricTypes\MetricType;
 
