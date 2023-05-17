@@ -2,7 +2,6 @@
 
 namespace Spatie\Prometheus\Tests;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\Prometheus\PrometheusServiceProvider;
 

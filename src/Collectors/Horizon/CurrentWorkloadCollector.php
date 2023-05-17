@@ -16,7 +16,7 @@ class CurrentWorkloadCollector implements Collector
                 return collect(app(WorkloadRepository::class)->get())
                     ->sortBy('name')
                     ->values()
-                    ->map(fn(array $workload) => [$workload['processes'], [$workload['name']]])
+                    ->map(fn (array $workload) => [$workload['processes'], [$workload['name']]])
                     ->toArray();
             });
     }
