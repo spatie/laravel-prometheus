@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Prometheus\Collectors\Horizon;
+namespace Spatie\Prometheus\Collectors;
 
 interface Collector
 {

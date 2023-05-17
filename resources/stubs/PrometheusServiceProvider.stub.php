@@ -16,7 +16,7 @@ class PrometheusServiceProvider extends ServiceProvider
             return 123.45;
         });
 
-        Prometheus::registerCollectors([
+        Prometheus::registerCollectorClasses([
             CurrentWorkloadCollector::class,
         ]);
 

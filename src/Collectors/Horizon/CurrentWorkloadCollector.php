@@ -3,6 +3,7 @@
 namespace Spatie\Prometheus\Collectors\Horizon;
 
 use Laravel\Horizon\Contracts\WorkloadRepository;
+use Spatie\Prometheus\Collectors\Collector;
 use Spatie\Prometheus\Facades\Prometheus;
 
 class CurrentWorkloadCollector implements Collector
