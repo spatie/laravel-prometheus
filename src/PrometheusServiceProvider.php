@@ -5,6 +5,7 @@ namespace Spatie\Prometheus;
 use Illuminate\Support\Facades\Route;
 use Prometheus\CollectorRegistry;
 use Prometheus\Storage\InMemory;
+use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Spatie\Prometheus\Http\Controllers\PrometheusMetricsController;
@@ -16,6 +17,12 @@ class PrometheusServiceProvider extends PackageServiceProvider
     {
         $package
             ->name('laravel-prometheus')
+            ->hasInstallCommand(function(InstallCommand $installer) {
+                $installer
+                    ->publishConfigFile()
+                    ->copyAndRegisterServiceProviderInApp()
+                    ->askToStarRepoOnGitHub('spatie/laravel-prometheus');
+            })
             ->hasConfigFile();
     }
 

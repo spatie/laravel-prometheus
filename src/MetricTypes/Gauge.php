@@ -3,20 +3,29 @@
 namespace Spatie\Prometheus\MetricTypes;
 
 use Closure;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 use Prometheus\CollectorRegistry;
 
 class Gauge implements MetricType
 {
+    protected array $values = [];
+
     public function __construct(
         protected string $label,
-        protected null|float|Closure $value = null,
+        null|float|Closure|array $value,
         protected ?string $name = null,
         protected ?string $namespace = null,
         protected ?string $helpText = null,
-    ) {
+        protected ?array $labelNames = []
+    )
+    {
         $this->name = $name ?? Str::slug($this->label, '_');
+
+        if (!is_null($value)) {
+            $this->value($value);
+        }
 
         $this->namespace = Str::of(App::getNamespace())->slug()->lower();
     }
@@ -24,6 +33,20 @@ class Gauge implements MetricType
     public function namespace(string $namespace): self
     {
         $this->namespace = $namespace;
+
+        return $this;
+    }
+
+    public function label(string $label): self
+    {
+        $this->labelNames[] = $label;
+
+        return $this;
+    }
+
+    public function labels(array $labelNames): self
+    {
+        $this->labelNames = $labelNames;
 
         return $this;
     }
@@ -42,9 +65,11 @@ class Gauge implements MetricType
         return $this;
     }
 
-    public function value(float|Closure $value): self
+    public function value(array|float|Closure $value, array|string $labelValues = []): self
     {
-        $this->value = $value;
+        $labelValues = Arr::wrap($labelValues);
+
+        $this->values[] = [$value, $labelValues];
 
         return $this;
     }
@@ -55,10 +80,35 @@ class Gauge implements MetricType
             $this->namespace,
             $this->name,
             $this->helpText ?? '',
+            $this->labelNames,
         );
 
-        $gauge->set(value($this->value));
+        collect($this->values)
+            ->each(function(array $valueAndLabels) use ($gauge) {
+                $this->handleValueAndLabels($gauge, $valueAndLabels);
+            });
 
         return $this;
+    }
+
+    protected function handleValueAndLabels(\Prometheus\Gauge $gauge, array $valueAndLabels)
+    {
+        [$value, $labels] = $valueAndLabels;
+
+        $value = value($value);
+
+        if (is_array($value) && is_array($value[0])) {
+            foreach($value as $valueAndLabels) {
+                $this->handleValueAndLabels($gauge, $valueAndLabels);
+            }
+
+            return;
+        }
+
+        if (is_array(($value))) {
+            [$value, $labels] = $value;
+        }
+
+        $gauge->set($value, $labels);
     }
 }

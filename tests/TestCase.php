@@ -12,9 +12,7 @@ class TestCase extends Orchestra
     {
         parent::setUp();
 
-        Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Spatie\\Prometheus\\Database\\Factories\\'.class_basename($modelName).'Factory'
-        );
+        ray()->newScreen($this->name());
     }
 
     protected function getPackageProviders($app)

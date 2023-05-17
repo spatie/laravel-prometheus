@@ -9,7 +9,7 @@ use Spatie\Prometheus\MetricTypes\MetricType;
 class Prometheus
 {
     /** @var array<\Spatie\Prometheus\MetricTypes\MetricType> */
-    protected array $metrics = [];
+    protected array $collectors = [];
 
     public function addGauge(
         string $label,
@@ -27,7 +27,7 @@ class Prometheus
 
     public function registerCollector(MetricType $collector): self
     {
-        $this->metrics[] = $collector;
+        $this->collectors[] = $collector;
 
         return $this;
 
@@ -35,6 +35,6 @@ class Prometheus
 
     public function renderCollectors(): string
     {
-        return app(RenderCollectorsAction::class)->execute($this->metrics);
+        return app(RenderCollectorsAction::class)->execute($this->collectors);
     }
 }

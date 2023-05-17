@@ -1,0 +1,7 @@
+# HELP app_my_gauge 
+# TYPE app_my_gauge gauge
+app_my_gauge{label_name="label_value"} 123
+app_my_gauge{label_name="label_value_2"} 456
+# HELP php_info Information about the PHP environment.
+# TYPE php_info gauge
+php_info{version="8.2.0"} 1
