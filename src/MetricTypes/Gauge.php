@@ -19,11 +19,10 @@ class Gauge implements MetricType
         protected ?string $namespace = null,
         protected ?string $helpText = null,
         protected ?array $labelNames = []
-    )
-    {
+    ) {
         $this->name = $name ?? Str::slug($this->label, '_');
 
-        if (!is_null($value)) {
+        if (! is_null($value)) {
             $this->value($value);
         }
 
@@ -84,7 +83,7 @@ class Gauge implements MetricType
         );
 
         collect($this->values)
-            ->each(function(array $valueAndLabels) use ($gauge) {
+            ->each(function (array $valueAndLabels) use ($gauge) {
                 $this->handleValueAndLabels($gauge, $valueAndLabels);
             });
 
@@ -98,7 +97,7 @@ class Gauge implements MetricType
         $value = value($value);
 
         if (is_array($value) && is_array($value[0])) {
-            foreach($value as $valueAndLabels) {
+            foreach ($value as $valueAndLabels) {
                 $this->handleValueAndLabels($gauge, $valueAndLabels);
             }
 

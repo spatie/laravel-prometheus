@@ -12,14 +12,13 @@ class PrometheusServiceProvider extends ServiceProvider
          * Here you can register all the exporters that you
          * want to export to prometheus
          */
-        Prometheus::addGauge('my_gauge', function() {
+        Prometheus::addGauge('my_gauge', function () {
             return 123.45;
         });
 
         Prometheus::registerCollectorClasses([
             CurrentWorkloadCollector::class,
         ]);
-
 
     }
 }

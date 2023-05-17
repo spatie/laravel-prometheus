@@ -17,7 +17,7 @@ class PrometheusServiceProvider extends PackageServiceProvider
     {
         $package
             ->name('laravel-prometheus')
-            ->hasInstallCommand(function(InstallCommand $installer) {
+            ->hasInstallCommand(function (InstallCommand $installer) {
                 $installer
                     ->publishConfigFile()
                     ->copyAndRegisterServiceProviderInApp()

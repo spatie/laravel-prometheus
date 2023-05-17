@@ -69,10 +69,9 @@ it('can render a gauge with labels', function () {
         ->value(123, ['label_value_1', 'label_value_2'])
         ->value(124, ['label_value_3', 'label_value_4']);
 
-
     assertPrometheusResultsMatchesSnapshot();
 });
 
-it('will not fail with no metric types registered', function() {
+it('will not fail with no metric types registered', function () {
     assertPrometheusResultsMatchesSnapshot();
 });
