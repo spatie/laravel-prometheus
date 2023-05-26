@@ -108,7 +108,6 @@ class Gauge implements MetricType
             return;
         }
 
-
         if (is_array(($value))) {
             [$value, $labels] = $value;
         }
