@@ -16,9 +16,19 @@ class PrometheusServiceProvider extends ServiceProvider
             return 123.45;
         });
 
+        /*
+         * Uncomment this line if you want to export
+         * all Horizon metrics to prometheus
+         */
+        // $this ->registerHorizonCollectors();
+    }
+
+    public function registerHorizonCollectors(): self
+    {
         Prometheus::registerCollectorClasses([
             CurrentWorkloadCollector::class,
         ]);
 
+        return $this;
     }
 }

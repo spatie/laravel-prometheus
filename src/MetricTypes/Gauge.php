@@ -7,6 +7,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 use Prometheus\CollectorRegistry;
+use Prometheus\Gauge as PrometheusGauge;
 
 class Gauge implements MetricType
 {
@@ -90,7 +91,7 @@ class Gauge implements MetricType
         return $this;
     }
 
-    protected function handleValueAndLabels(\Prometheus\Gauge $gauge, array $valueAndLabels)
+    protected function handleValueAndLabels(PrometheusGauge $gauge, array $valueAndLabels)
     {
         [$value, $labels] = $valueAndLabels;
 
