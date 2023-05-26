@@ -13,8 +13,6 @@ class FailedJobsPerHourCollector implements Collector
     {
         Prometheus::addGauge('Failed Jobs Per Hour')
             ->helpText('The number of recently failed jobs')
-            ->value(function() {
-                return app(JobRepository::class)->countRecentlyFailed();
-            });
+            ->value(fn() => app(JobRepository::class)->countRecentlyFailed());
     }
 }
