@@ -12,6 +12,6 @@ class CurrentMasterSupervisorCollector implements Collector
     {
         Prometheus::addGauge('Number of master supervisors')
             ->helpText('The number of recently failed jobs')
-            ->value(fn() => app(JobRepository::class)->countRecentlyFailed());
+            ->value(fn () => app(JobRepository::class)->countRecentlyFailed());
     }
 }
