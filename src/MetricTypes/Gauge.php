@@ -94,16 +94,20 @@ class Gauge implements MetricType
     protected function handleValueAndLabels(PrometheusGauge $gauge, array $valueAndLabels)
     {
         [$value, $labels] = $valueAndLabels;
-
         $value = value($value);
 
-        if (is_array($value) && is_array($value[0])) {
+        if (is_array($value) && Arr::exists($value, 0) && is_array($value[0])) {
             foreach ($value as $valueAndLabels) {
                 $this->handleValueAndLabels($gauge, $valueAndLabels);
             }
 
             return;
         }
+
+        if (is_array($value) && count($value) === 0) {
+            return;
+        }
+
 
         if (is_array(($value))) {
             [$value, $labels] = $value;

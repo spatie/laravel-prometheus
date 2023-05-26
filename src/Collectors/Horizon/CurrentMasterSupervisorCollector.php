@@ -10,9 +10,11 @@ class CurrentMasterSupervisorCollector implements Collector
 {
     public function register(): void
     {
-        Prometheus::addGauge('Number of mastersupervisors')
+        Prometheus::addGauge('Number of master supervisors')
             ->value(function () {
-                return count(app(MasterSupervisorRepository::class)->all());
+                $supervisors = app(MasterSupervisorRepository::class)->all();
+
+                return count($supervisors);
             });
 
     }

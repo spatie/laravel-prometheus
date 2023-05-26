@@ -1,0 +1,6 @@
+# HELP app_number_of_master_supervisors 
+# TYPE app_number_of_master_supervisors gauge
+app_number_of_master_supervisors 0
+# HELP php_info Information about the PHP environment.
+# TYPE php_info gauge
+php_info{version="8.2.0"} 1

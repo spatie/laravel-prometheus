@@ -2,6 +2,7 @@
 
 namespace Spatie\Prometheus\Tests;
 
+use Laravel\Horizon\HorizonServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\Prometheus\PrometheusServiceProvider;
 
@@ -18,6 +19,7 @@ class TestCase extends Orchestra
     {
         return [
             PrometheusServiceProvider::class,
+            HorizonServiceProvider::class,
         ];
     }
 
