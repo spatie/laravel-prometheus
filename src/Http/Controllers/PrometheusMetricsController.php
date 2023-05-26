@@ -15,6 +15,9 @@ class PrometheusMetricsController
 
         $renderedCollectors = $prometheus->renderCollectors();
 
-        return response($renderedCollectors, headers: ['Content-Type' => RenderTextFormat::MIME_TYPE]);
+        return response(
+            $renderedCollectors,
+            headers: ['Content-Type' => RenderTextFormat::MIME_TYPE]
+        );
     }
 }
