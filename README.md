@@ -79,6 +79,8 @@ Please review [our security policy](../../security/policy) on how to report secu
 - [Freek Van der Herten](https://github.com/freekmurze)
 - [All Contributors](../../contributors)
 
+The Horizon collectors were heavily inspired on Lukas Kämmerling' excellent [laravel-horizon-prometheus-exporter](https://github.com/LKaemmerling/laravel-horizon-prometheus-exporter) package.
+
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.

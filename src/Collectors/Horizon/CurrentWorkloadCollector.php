@@ -10,7 +10,7 @@ class CurrentWorkloadCollector implements Collector
 {
     public function register(): void
     {
-        Prometheus::addGauge('Horizon current workload')
+        Prometheus::addGauge('Current workload')
             ->label('queue')
             ->helpText('Current workload of all queues')
             ->value(function () {

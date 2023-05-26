@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\ServiceProvider;
+use Spatie\Prometheus\Collectors\Horizon\CurrentMasterSupervisorCollector;
 use Spatie\Prometheus\Collectors\Horizon\CurrentWorkloadCollector;
+use Spatie\Prometheus\Collectors\Horizon\FailedJobsPerHourCollector;
 use Spatie\Prometheus\Facades\Prometheus;
 
 class PrometheusServiceProvider extends ServiceProvider
@@ -26,7 +28,9 @@ class PrometheusServiceProvider extends ServiceProvider
     public function registerHorizonCollectors(): self
     {
         Prometheus::registerCollectorClasses([
+            CurrentMasterSupervisorCollector::class,
             CurrentWorkloadCollector::class,
+            FailedJobsPerHourCollector::class,
         ]);
 
         return $this;
