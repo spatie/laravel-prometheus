@@ -1,4 +1,4 @@
-# HELP app_number_of_master_supervisors 
+# HELP app_number_of_master_supervisors The number of recently failed jobs
 # TYPE app_number_of_master_supervisors gauge
 app_number_of_master_supervisors 0
 # HELP php_info Information about the PHP environment.

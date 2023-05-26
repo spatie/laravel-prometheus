@@ -2,6 +2,7 @@
 
 use Illuminate\Support\ServiceProvider;
 use Spatie\Prometheus\Collectors\Horizon\CurrentMasterSupervisorCollector;
+use Spatie\Prometheus\Collectors\Horizon\CurrentProcessesPerQueueCollector;
 use Spatie\Prometheus\Collectors\Horizon\CurrentWorkloadCollector;
 use Spatie\Prometheus\Collectors\Horizon\FailedJobsPerHourCollector;
 use Spatie\Prometheus\Facades\Prometheus;
@@ -29,6 +30,7 @@ class PrometheusServiceProvider extends ServiceProvider
     {
         Prometheus::registerCollectorClasses([
             CurrentMasterSupervisorCollector::class,
+            CurrentProcessesPerQueueCollector::class,
             CurrentWorkloadCollector::class,
             FailedJobsPerHourCollector::class,
         ]);
