@@ -18,9 +18,7 @@ it('can render a gauge with a plain value', closure: function () {
 
 it('can render a gauge with all options', function () {
     /** @var \Spatie\Prometheus\MetricTypes\Gauge $gauge */
-    $gauge = Prometheus::addGauge('my gauge');
-
-    $gauge
+    Prometheus::addGauge('my gauge')
         ->namespace('other_namespace')
         ->helpText('This is the help text')
         ->name('alternative_name')

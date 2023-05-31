@@ -19,7 +19,8 @@ class Gauge implements MetricType
         protected ?string $name = null,
         protected ?string $namespace = null,
         protected ?string $helpText = null,
-        protected ?array $labelNames = []
+        protected ?array $labelNames = [],
+        protected string $urlName = 'default',
     ) {
         $this->name = $name ?? Str::slug($this->label, '_');
 
@@ -35,6 +36,18 @@ class Gauge implements MetricType
         $this->namespace = $namespace;
 
         return $this;
+    }
+
+    public function urlName(string $urlName): self
+    {
+        $this->urlName = $urlName;
+
+        return $this;
+    }
+
+    public function getUrlName(): string
+    {
+        return $this->urlName;
     }
 
     public function label(string $label): self
@@ -114,4 +127,6 @@ class Gauge implements MetricType
 
         $gauge->set($value, $labels);
     }
+
+
 }

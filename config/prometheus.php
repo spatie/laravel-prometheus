@@ -4,9 +4,11 @@ return [
     'enabled' => true,
 
     /*
-     * The url that will return all the metrics.
+     * The urls that will return metrics.
      */
-    'url' => 'prometheus',
+    'urls' => [
+        'default' => 'prometheus',
+    ],
 
     /*
      * The middleware that will be applied to the url above

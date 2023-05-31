@@ -5,10 +5,10 @@ use function Spatie\Snapshots\assertMatchesSnapshot;
 
 uses(TestCase::class)->in(__DIR__);
 
-function assertPrometheusResultsMatchesSnapshot()
+function assertPrometheusResultsMatchesSnapshot(string $urlName = 'default')
 {
     $content = test()
-        ->get('prometheus')
+        ->get(route("prometheus.{$urlName}"))
         ->assertSuccessful()
         ->content();
 

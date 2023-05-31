@@ -30,11 +30,14 @@ class Prometheus
         $this->collectors[] = $collector;
 
         return $this;
-
     }
 
-    public function renderCollectors(): string
+    public function renderCollectors(string $urlName = 'default'): string
     {
-        return app(RenderCollectorsAction::class)->execute($this->collectors);
+        $collectorsForUrlName = collect($this->collectors)
+            ->filter(fn(MetricType $metricType) => $metricType->getUrlName() === $urlName)
+            ->toArray();
+
+        return app(RenderCollectorsAction::class)->execute($collectorsForUrlName);
     }
 }

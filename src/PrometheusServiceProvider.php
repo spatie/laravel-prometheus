@@ -38,21 +38,22 @@ class PrometheusServiceProvider extends PackageServiceProvider
 
     public function packageBooted()
     {
-        $this->registerEndpoint();
+        $this->registerUrls();
     }
 
-    protected function registerEndpoint(): self
+    protected function registerUrls(): self
     {
         if (! config('prometheus.enabled')) {
             return $this;
         }
 
-        if (! $url = config('prometheus.url')) {
-            return $this;
+        foreach(config('prometheus.urls') as $name => $url) {
+            Route::get($url, PrometheusMetricsController::class)
+                ->middleware(AllowIps::class)
+                ->name("prometheus.{$name}");
         }
 
-        Route::get($url, PrometheusMetricsController::class)
-            ->middleware(AllowIps::class);
+
 
         return $this;
     }
