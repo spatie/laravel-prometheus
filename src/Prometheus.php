@@ -35,7 +35,7 @@ class Prometheus
     public function renderCollectors(string $urlName = 'default'): string
     {
         $collectorsForUrlName = collect($this->collectors)
-            ->filter(fn(MetricType $metricType) => $metricType->getUrlName() === $urlName)
+            ->filter(fn (MetricType $metricType) => $metricType->getUrlName() === $urlName)
             ->toArray();
 
         return app(RenderCollectorsAction::class)->execute($collectorsForUrlName);

@@ -2,7 +2,6 @@
 
 namespace Spatie\Prometheus\Collectors\Horizon;
 
-
 use Spatie\Prometheus\Collectors\Collector;
 
 class HorizonStatusCollector implements Collector

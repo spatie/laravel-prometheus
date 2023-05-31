@@ -127,6 +127,4 @@ class Gauge implements MetricType
 
         $gauge->set($value, $labels);
     }
-
-
 }
