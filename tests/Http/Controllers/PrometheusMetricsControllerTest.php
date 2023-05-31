@@ -74,7 +74,6 @@ it('will not fail with no metric types registered', function () {
     assertPrometheusResultsMatchesSnapshot();
 });
 
-
 it('will render the gauges on the correct urls', closure: function () {
     config()->set('prometheus.urls', [
         'default' => '/prometheus',
