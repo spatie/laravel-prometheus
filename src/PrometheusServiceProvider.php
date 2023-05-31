@@ -53,8 +53,6 @@ class PrometheusServiceProvider extends PackageServiceProvider
                 ->name("prometheus.{$name}");
         }
 
-
-
         return $this;
     }
 }

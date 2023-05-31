@@ -73,3 +73,19 @@ it('can render a gauge with labels', function () {
 it('will not fail with no metric types registered', function () {
     assertPrometheusResultsMatchesSnapshot();
 });
+
+
+it('will render the gauges on the correct urls', closure: function () {
+    config()->set('prometheus.urls', [
+        'default' => '/prometheus',
+        'alternative' => '/my-alternative-route',
+    ]);
+
+    $this->reloadServiceProvider();
+
+    Prometheus::addGauge('my default gauge', 123.45);
+    Prometheus::addGauge('my alternative gauge', 123.45)->urlName('alternative');
+
+    assertPrometheusResultsMatchesSnapshot();
+    assertPrometheusResultsMatchesSnapshot('alternative');
+});

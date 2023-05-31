@@ -31,4 +31,11 @@ class TestCase extends Orchestra
 
         return $this->withServerVariables(['REMOTE_ADDR' => $ip]);
     }
+
+    public function reloadServiceProvider(): self
+    {
+        (new PrometheusServiceProvider($this->app))->packageBooted();
+
+        return $this;
+    }
 }
