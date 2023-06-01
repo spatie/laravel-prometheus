@@ -3,6 +3,7 @@
 namespace Spatie\Prometheus;
 
 use Spatie\Prometheus\Actions\RenderCollectorsAction;
+use Spatie\Prometheus\Collectors\Collector;
 use Spatie\Prometheus\MetricTypes\Gauge;
 use Spatie\Prometheus\MetricTypes\MetricType;
 
@@ -28,6 +29,15 @@ class Prometheus
     public function registerCollector(MetricType $collector): self
     {
         $this->collectors[] = $collector;
+
+        return $this;
+    }
+
+    public function registerCollectorClasses(array $collectors): self
+    {
+        collect($collectors)
+            ->map(fn(string $collectorClass) => app($collectorClass))
+            ->each(fn(Collector $collector) => $collector->register());
 
         return $this;
     }

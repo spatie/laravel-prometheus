@@ -1,0 +1,6 @@
+# HELP app_horizon_status The status of Horizon, -1 = inactive, 0 = paused, 1 = running
+# TYPE app_horizon_status gauge
+app_horizon_status -1
+# HELP php_info Information about the PHP environment.
+# TYPE php_info gauge
+php_info{version="8.2.0"} 1
