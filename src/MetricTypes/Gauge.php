@@ -28,7 +28,9 @@ class Gauge implements MetricType
             $this->value($value);
         }
 
-        $this->namespace = Str::of(App::getNamespace())->slug()->lower();
+        $this->namespace = Str::of(config('prometheus.default_namespace'))
+            ->slug()
+            ->lower();
     }
 
     public function namespace(string $namespace): self
