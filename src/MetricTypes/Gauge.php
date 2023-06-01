@@ -4,7 +4,6 @@ namespace Spatie\Prometheus\MetricTypes;
 
 use Closure;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 use Prometheus\CollectorRegistry;
 use Prometheus\Gauge as PrometheusGauge;
