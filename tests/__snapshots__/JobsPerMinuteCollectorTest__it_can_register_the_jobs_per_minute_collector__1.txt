@@ -1,0 +1,6 @@
+# HELP app_jobs_per_minute The number of jobs per minute
+# TYPE app_jobs_per_minute gauge
+app_jobs_per_minute 0
+# HELP php_info Information about the PHP environment.
+# TYPE php_info gauge
+php_info{version="8.2.0"} 1

@@ -1,0 +1,6 @@
+# HELP app_recent_jobs The number of recent jobs
+# TYPE app_recent_jobs gauge
+app_recent_jobs 0
+# HELP php_info Information about the PHP environment.
+# TYPE php_info gauge
+php_info{version="8.2.0"} 1
