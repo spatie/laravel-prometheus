@@ -12,6 +12,6 @@ class RecentJobsCollector implements Collector
     {
         Prometheus::addGauge('Recent jobs')
             ->helpText('The number of recent jobs')
-            ->value(fn() => app(JobRepository::class)->countRecent());
+            ->value(fn () => app(JobRepository::class)->countRecent());
     }
 }
