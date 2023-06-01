@@ -29,7 +29,7 @@ class Gauge implements MetricType
         }
 
         $this->namespace = Str::of(config('prometheus.default_namespace'))
-            ->slug()
+            ->slug('_')
             ->lower();
     }
 

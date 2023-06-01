@@ -16,6 +16,14 @@ it('can render a gauge with a plain value', closure: function () {
     assertPrometheusResultsMatchesSnapshot();
 });
 
+it('can use a custom namespace', function() {
+   config()->set('prometheus.default_namespace', 'custom_namespace');
+
+    Prometheus::addGauge('my gauge', 123.45);
+
+    assertPrometheusResultsMatchesSnapshot();
+});
+
 it('can render a gauge with all options', function () {
     /** @var \Spatie\Prometheus\MetricTypes\Gauge $gauge */
     Prometheus::addGauge('my gauge')
