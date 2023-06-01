@@ -12,6 +12,6 @@ class JobsPerMinuteCollector implements Collector
     {
         Prometheus::addGauge('jobs per minute')
             ->helpText('The number of jobs per minute')
-            ->value(fn() => app(MetricsRepository::class)->jobsProcessedPerMinute());
+            ->value(fn () => app(MetricsRepository::class)->jobsProcessedPerMinute());
     }
 }
