@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-prometheus` will be documented in this file.
 
+## 0.0.5 - 2023-06-01
+
+- experimental release
+
 ## 0.0.3 - 2023-06-01
 
 ### What's Changed
