@@ -36,8 +36,8 @@ class Prometheus
     public function registerCollectorClasses(array $collectors): self
     {
         collect($collectors)
-            ->map(fn(string $collectorClass) => app($collectorClass))
-            ->each(fn(Collector $collector) => $collector->register());
+            ->map(fn (string $collectorClass) => app($collectorClass))
+            ->each(fn (Collector $collector) => $collector->register());
 
         return $this;
     }
