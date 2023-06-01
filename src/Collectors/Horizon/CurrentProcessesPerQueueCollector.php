@@ -11,6 +11,7 @@ class CurrentProcessesPerQueueCollector implements Collector
     public function register(): void
     {
         Prometheus::addGauge('Horizon Current Processes')
+            ->name('horizon_current_processes')
             ->helpText('Current processes of all queues')
             ->label('queue')
             ->value(function () {

@@ -17,6 +17,7 @@ class HorizonStatusCollector implements Collector
     public function register(): void
     {
         Prometheus::addGauge('Horizon status')
+            ->name('horizon_status')
             ->helpText('The status of Horizon, -1 = inactive, 0 = paused, 1 = running')
             ->value(function () {
                 if (! $masters = app(MasterSupervisorRepository::class)->all()) {
