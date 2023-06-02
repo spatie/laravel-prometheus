@@ -1,6 +1,6 @@
 ---
 title: v1
-slogan: Monitor the health of a Laravel application
+slogan: Export Laravel metrics to Prometheus
 githubUrl: https://github.com/spatie/laravel-prometheus
 branch: main
 ---
