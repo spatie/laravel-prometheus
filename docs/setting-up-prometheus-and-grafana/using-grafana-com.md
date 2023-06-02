@@ -1,4 +1,4 @@
 ---
 title: Using grafana.com
-weight: 1
+weight: 2
 ---
