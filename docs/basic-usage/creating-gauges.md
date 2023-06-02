@@ -16,7 +16,7 @@ You can add as many gauges as you want. Here's an example where we export the us
 
 ```php
 Prometheus::addGauge('User count')
-    ->value(fn() => User::count()
+    ->value(fn() => User::count();
 ```
 
 ## Adding a help text

@@ -5,7 +5,17 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/spatie/laravel-prometheus/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/spatie/laravel-prometheus/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-prometheus.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-prometheus)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+This package can export key metrics of your app to [Prometheus](https://prometheus.io). It does this by providing an easy way to register metrics. Here's an example where we are going to export the user count to Prometheus.
+
+```php
+Prometheus::addGauge('User count')
+    ->value(fn() => User::count();
+```
+
+These metrics will be exposed at the `/prometheus` endpoint. The package offers a way to add a security layer, so your key metrics don't become public.
+
+You can configure your Prometheus instance to periodically crawl and import the metrics at the `/prometheus` endpoint of your app. Using [Grafana](https://grafana.com), you can visualize the data points that are stored in Prometheus.
+
 
 ## Support us
 
@@ -15,46 +25,9 @@ We invest a lot of resources into creating [best in class open source packages](
 
 We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
 
-## Installation
+## Documentation
 
-You can install the package via composer:
-
-```bash
-composer require spatie/laravel-prometheus
-```
-
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --tag="laravel-prometheus-migrations"
-php artisan migrate
-```
-
-You can publish the config file with:
-
-```bash
-php artisan vendor:publish --tag="laravel-prometheus-config"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="laravel-prometheus-views"
-```
-
-## Usage
-
-```php
-$prometheus = new Spatie\Prometheus();
-echo $prometheus->echoPhrase('Hello, Spatie!');
-```
+You can find full documentation on [our dedicated documentation site](https://docs.spatie.be/laravel-prometheus).
 
 ## Testing
 
