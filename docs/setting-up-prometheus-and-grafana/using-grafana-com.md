@@ -53,7 +53,7 @@ Once you've configured the agent, you can create a new dashboard. Head over to "
 
 On that screen, click "+ Add Visualization"
 
-![Grafana.com visualization](/docs/laravel-prometheus/v1/images/add-visualization.jpg).
+![Grafana.com visualization](/docs/laravel-prometheus/v1/images/add-dashboard.jpg).
 
 Next, click your hosted prometheus instance as the source.
 
