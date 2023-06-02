@@ -13,6 +13,6 @@ class CurrentMasterSupervisorCollector implements Collector
         Prometheus::addGauge('Number of master supervisors')
             ->name('horizon_master_supervisors')
             ->helpText('The number of master supervisors')
-            ->value(fn () => app(MasterSupervisorRepository::class)->all());
+            ->value(fn () => count(app(MasterSupervisorRepository::class)->all()));
     }
 }
