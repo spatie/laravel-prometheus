@@ -2,7 +2,7 @@
 
 namespace Spatie\Prometheus\Collectors\Horizon;
 
-use Laravel\Horizon\Contracts\JobRepository;
+use Laravel\Horizon\Contracts\MasterSupervisorRepository;
 use Spatie\Prometheus\Collectors\Collector;
 use Spatie\Prometheus\Facades\Prometheus;
 
@@ -13,6 +13,6 @@ class CurrentMasterSupervisorCollector implements Collector
         Prometheus::addGauge('Number of master supervisors')
             ->name('horizon_master_supervisors')
             ->helpText('The number of master supervisors')
-            ->value(fn () => app(JobRepository::class)->countRecentlyFailed());
+            ->value(fn () => app(MasterSupervisorRepository::class)->all());
     }
 }
