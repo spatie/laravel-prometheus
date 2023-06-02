@@ -96,3 +96,9 @@ it('will render the gauges on the correct urls', closure: function () {
     assertPrometheusResultsMatchesSnapshot();
     assertPrometheusResultsMatchesSnapshot('alternative');
 });
+
+it('will convert the gauge name to snake case', closure: function () {
+    Prometheus::addGauge('My Gauge', 123.45);
+
+    assertPrometheusResultsMatchesSnapshot();
+});

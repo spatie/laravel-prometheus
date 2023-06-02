@@ -1,4 +1,4 @@
 ---
-title: Usage
+title: Basic usage
 weight: 1
 ---

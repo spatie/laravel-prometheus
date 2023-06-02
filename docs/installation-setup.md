@@ -112,6 +112,17 @@ class PrometheusServiceProvider extends ServiceProvider
 }
 ```
 
+### Configuring the metrics endpoint
+
+By default, the metrics endpoint will be available at `/prometheus`. You can change this by changing the default url in the `prometheus.php` config file.
+
+```php
+// in config/prometheus.php
+'urls' => [
+    'default' => 'alternative-url',
+],
+```
+
 ### Securing the metrics endpoint
 
 You probably don't want the endpoint that exposes your metrics to be publicly accessible. By adding an ip address to the `allowed_ips` key of the `prometheus.php` config file, you can restrict access to the endpoint to only that ip address.

@@ -1,5 +1,5 @@
 ---
-title: First subject
+title: Using Horizon exporters
 weight: 1
 ---
 
