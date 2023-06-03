@@ -5,6 +5,8 @@ weight: 2
 
 The easiest way to get started using Prometheus and visualizing data via Grafana is by creating a free account on [grafana.com](https://grafana.com) and using the hosted Grafana instance.
 
+During this process, you'll install the Grafana agent, which will read the metrics on your `/prometheus` endpoint, and push them to Grafana.com.
+
 ## Configuring Grafana
 
 Once your account has been created, you'll be on your account dashboard. There, you should launch your Grafana instance by clicking the "Launch" button.
@@ -23,7 +25,7 @@ Next, follow the wizard, install the agent, and create a new config.
 
 ![Grafana.com config](/docs/laravel-prometheus/v1/images/new-config.jpg).
 
-Follow, the steps to install the agent and create the config file on your server.
+Follow, the steps to create the config file, and start the agent on your server. To keep the agent running, you might use something like [Supervisord](http://supervisord.org) (Laravel Forge users can just create [a deamon](https://forge.laravel.com/docs/1.0/resources/daemons.html))
 
 In the `scrape_configs` key of the config, you should add a job to scrape the `/prometheus` endpoint of your Laravel application. For example:
 
