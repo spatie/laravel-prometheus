@@ -65,5 +65,4 @@ In the metric dropdown, you should see all the metrics that are being scraped fr
 
 ![Grafana.com metrics](/docs/laravel-prometheus/v1/images/metrics.jpg).
 
-
 From here on, you can create your dashboard as you would normally do in Grafana. For more information on how to create dashboards, please refer to the [Grafana documentation](https://grafana.com/docs/grafana/latest/guides/getting_started/).
