@@ -3,8 +3,6 @@ title: Introduction
 weight: 1
 ---
 
-**THIS PACKAGE IS STILL IN DEVELOPMENT**
-
 This package can export key metrics of your app to [Prometheus](https://prometheus.io). It does this by providing an easy way to register metrics. Here's an example where we are going to export the user count to Prometheus.
 
 ```php
