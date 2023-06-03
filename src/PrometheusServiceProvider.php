@@ -33,7 +33,7 @@ class PrometheusServiceProvider extends PackageServiceProvider
         $this->app->alias(Prometheus::class, 'prometheus');
 
         $this->app->scoped(CollectorRegistry::class, function () {
-            return new CollectorRegistry(new InMemory());
+            return new CollectorRegistry(new InMemory(), false);
         });
     }
 

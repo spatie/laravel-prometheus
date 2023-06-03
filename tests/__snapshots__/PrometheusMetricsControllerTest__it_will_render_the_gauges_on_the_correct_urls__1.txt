@@ -1,6 +1,3 @@
 # HELP app_my_default_gauge 
 # TYPE app_my_default_gauge gauge
 app_my_default_gauge 123.45
-# HELP php_info Information about the PHP environment.
-# TYPE php_info gauge
-php_info{version="8.2.0"} 1

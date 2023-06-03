@@ -1,6 +1,3 @@
 # HELP app_horizon_failed_jobs_per_hour The number of recently failed jobs
 # TYPE app_horizon_failed_jobs_per_hour gauge
 app_horizon_failed_jobs_per_hour 0
-# HELP php_info Information about the PHP environment.
-# TYPE php_info gauge
-php_info{version="8.2.0"} 1

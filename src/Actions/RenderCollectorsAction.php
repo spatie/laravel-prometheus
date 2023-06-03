@@ -10,6 +10,7 @@ class RenderCollectorsAction
 {
     public function __construct(protected CollectorRegistry $registry)
     {
+
     }
 
     public function execute(array $collectors): string
@@ -24,7 +25,9 @@ class RenderCollectorsAction
     {
         $renderer = new RenderTextFormat();
 
-        $result = $renderer->render($this->registry->getMetricFamilySamples());
+        $metricSamples = $this->registry->getMetricFamilySamples();
+
+        $result = $renderer->render($metricSamples);
 
         $this->registry->wipeStorage();
 

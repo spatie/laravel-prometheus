@@ -2,6 +2,3 @@
 # TYPE other_namespace_my_gauge gauge
 other_namespace_my_gauge{label_name_1="label_value_1",label_name_2="label_value_2"} 123
 other_namespace_my_gauge{label_name_1="label_value_3",label_name_2="label_value_4"} 124
-# HELP php_info Information about the PHP environment.
-# TYPE php_info gauge
-php_info{version="8.2.0"} 1
