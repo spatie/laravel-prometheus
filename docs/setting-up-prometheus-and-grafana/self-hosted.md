@@ -9,15 +9,15 @@ Here are the general steps to set up Prometheus and Grafana via Laravel Forge. T
 
 ## 1. Provision a server on Laravel Forge and install Prometheus and Grafana on it
 - Connect to your server via SSH.
-- Install Prometheus by following the official installation guide: https://prometheus.io/docs/prometheus/latest/installation/
-- Install Grafana by following the official installation guide: https://grafana.com/docs/grafana/latest/installation/
+- Install Prometheus by following [the official installation guide](https://prometheus.io/docs/prometheus/latest/installation/)
+- Install Grafana by following [the official installation guide](https://grafana.com/docs/grafana/latest/installation/)
 
 ## 2. Configure Prometheus to scrape the metrics from your application and store them in its database
 - Edit the Prometheus configuration file `/etc/prometheus/prometheus.yml` and add a new job to scrape metrics from your application. For example:
 
-```
+```yaml
 scrape_configs:
-- job_name: 'myapp'
+- job_name: laravel
   scrape_interval: 10s
   metrics_path: /prometheus
   static_configs:
