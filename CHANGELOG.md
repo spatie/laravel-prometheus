@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-prometheus` will be documented in this file.
 
+## 1.0.0 - 2023-06-08
+
+- initial release
+
 ## 0.0.7 - 2023-06-03
 
 **Full Changelog**: https://github.com/spatie/laravel-prometheus/compare/0.0.6...0.0.7
