@@ -1,6 +1,6 @@
 ---
 title: Using fly.io
-weight: 3
+weight: 4
 ---
 
 Applications hosted on [fly.io](https://fly.io) get a Grafana dashboard automatically (available at [fly-metrics.com](https://fly-metrics.net)).

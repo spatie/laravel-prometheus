@@ -1,6 +1,6 @@
 ---
 title: Self-hosted
-weight: 4
+weight: 3
 ---
 
 To receive metrics from your applications using Prometheus, and visualize them using Grafana, you can use a docker image that is deployed on your server.
