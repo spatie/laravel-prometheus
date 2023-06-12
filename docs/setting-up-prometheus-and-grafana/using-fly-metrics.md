@@ -31,6 +31,6 @@ From within [fly-metrics.com](https://fly-metrics.net), you can choose to create
 
 To find your metrics, choose the "Prometheus on Fly" data source.
 
-![fly-metrics.net graph](/docs/laravel-prometheus/v1/images/add-dashboard-fly.png)
+![fly-metrics.net graph](/docs/laravel-prometheus/v1/images/prometheus-source-fly.png)
 
 From here on, you can create your dashboard as you would normally do in Grafana. For more information on how to create dashboards, please refer to the [Grafana documentation](https://grafana.com/docs/grafana/latest/guides/getting_started/).
