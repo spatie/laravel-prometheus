@@ -12,7 +12,7 @@ composer require spatie/laravel-prometheus
 Next, you should run the `prometheus:install` command.
 
 ```bash
-composer prometheus:install
+php artisan prometheus:install
 ```
 
 This will publish a config file named `prometheus.php` in your config with the following contents:
