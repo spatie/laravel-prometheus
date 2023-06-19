@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-prometheus` will be documented in this file.
 
+## 1.0.1 - 2023-06-19
+
+- fix for Vapor
+
 ## 1.0.0 - 2023-06-08
 
 - initial release
