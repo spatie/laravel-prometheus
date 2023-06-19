@@ -29,7 +29,7 @@ class PrometheusServiceProvider extends PackageServiceProvider
 
     public function packageRegistered()
     {
-        $this->app->scoped(Prometheus::class);
+        $this->app->singleton(Prometheus::class);
         $this->app->alias(Prometheus::class, 'prometheus');
 
         $this->app->scoped(CollectorRegistry::class, function () {
