@@ -27,10 +27,6 @@ class RenderCollectorsAction
 
         $metricSamples = $this->registry->getMetricFamilySamples();
 
-        $result = $renderer->render($metricSamples);
-
-        $this->registry->wipeStorage();
-
-        return $result;
+        return $renderer->render($metricSamples);
     }
 }
