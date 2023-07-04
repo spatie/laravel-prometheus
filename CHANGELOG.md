@@ -2,6 +2,20 @@
 
 All notable changes to `laravel-prometheus` will be documented in this file.
 
+## 1.0.3 - 2023-07-04
+
+### What's Changed
+
+- Use configured middleware for routes
+- Bump dependabot/fetch-metadata from 1.5.1 to 1.6.0 by @dependabot in https://github.com/spatie/laravel-prometheus/pull/11
+- Minor spelling fix by @mbardelmeijer in https://github.com/spatie/laravel-prometheus/pull/9
+
+### New Contributors
+
+- @mbardelmeijer made their first contribution in https://github.com/spatie/laravel-prometheus/pull/9
+
+**Full Changelog**: https://github.com/spatie/laravel-prometheus/compare/1.0.2...1.0.3
+
 ## 1.0.2 - 2023-06-28
 
 ### What's Changed
