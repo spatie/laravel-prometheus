@@ -25,7 +25,7 @@ Next, follow the wizard, install the agent, and create a new config.
 
 ![Grafana.com config](/docs/laravel-prometheus/v1/images/new-config.jpg).
 
-Follow, the steps to create the config file, and start the agent on your server. To keep the agent running, you might use something like [Supervisord](http://supervisord.org) (Laravel Forge users can just create [a deamon](https://forge.laravel.com/docs/1.0/resources/daemons.html))
+Follow, the steps to create the config file, and start the agent on your server. To keep the agent running, you might use something like [Supervisord](http://supervisord.org) (Laravel Forge users can just create [a daemon](https://forge.laravel.com/docs/1.0/resources/daemons.html))
 
 In the `scrape_configs` key of the config, you should add a job to scrape the `/prometheus` endpoint of your Laravel application. For example:
 
