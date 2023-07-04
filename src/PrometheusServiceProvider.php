@@ -50,7 +50,7 @@ class PrometheusServiceProvider extends PackageServiceProvider
 
         foreach (config('prometheus.urls') as $name => $url) {
             Route::get($url, PrometheusMetricsController::class)
-                ->middleware(config('prometheus.middleware', [AllowIps:class]))
+                ->middleware(config('prometheus.middleware', [AllowIps::class]))
                 ->name("prometheus.{$name}");
         }
 
