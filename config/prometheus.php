@@ -12,7 +12,7 @@ return [
 
     /*
      * Only these IP's will be allowed to visit the above urls.
-     * When set to `null` all IP's are allowed.
+     * All IP's are allowed when empty.
      */
     'allowed_ips' => [
         // '1.2.3.4',
