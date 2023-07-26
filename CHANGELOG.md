@@ -2,6 +2,18 @@
 
 All notable changes to `laravel-prometheus` will be documented in this file.
 
+## 1.0.4 - 2023-07-26
+
+### What's Changed
+
+- chore(config): ensure the config suggests a countable by @pataar in https://github.com/spatie/laravel-prometheus/pull/14
+
+### New Contributors
+
+- @pataar made their first contribution in https://github.com/spatie/laravel-prometheus/pull/14
+
+**Full Changelog**: https://github.com/spatie/laravel-prometheus/compare/1.0.3...1.0.4
+
 ## 1.0.3 - 2023-07-04
 
 ### What's Changed
