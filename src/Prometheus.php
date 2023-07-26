@@ -14,10 +14,10 @@ class Prometheus
 
     public function addGauge(
         string $label,
-        null|float|callable $value = null,
-        ?string $name = null,
-        ?string $namespace = null,
-        ?string $helpText = null,
+        float|callable $value = null,
+        string $name = null,
+        string $namespace = null,
+        string $helpText = null,
     ): Gauge {
         $collector = new Gauge($label, $value, $name, $namespace, $helpText);
 

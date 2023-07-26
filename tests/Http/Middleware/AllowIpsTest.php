@@ -7,7 +7,7 @@ it('by default each ip will be allowed', function () {
         ->assertSuccessful();
 });
 
-it('it can allow only certain ips', function (string|null $ip, bool $allowed) {
+it('it can allow only certain ips', function (?string $ip, bool $allowed) {
     config()->set('prometheus.allowed_ips', [
         '1.2.3.4',
         '5.6.7.8',
