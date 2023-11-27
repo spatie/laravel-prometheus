@@ -9,7 +9,7 @@ This package can export key metrics of your app to [Prometheus](https://promethe
 
 ```php
 Prometheus::addGauge('User count')
-    ->value(fn() => User::count();
+    ->value(fn() => User::count());
 ```
 
 These metrics will be exposed at the `/prometheus` endpoint. The package offers a way to add a security layer, so your key metrics don't become public.
