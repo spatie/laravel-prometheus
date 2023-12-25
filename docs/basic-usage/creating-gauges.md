@@ -16,7 +16,7 @@ You can add as many gauges as you want. Here's an example where we export the us
 
 ```php
 Prometheus::addGauge('User count')
-    ->value(fn() => User::count();
+    ->value(fn() => User::count());
 ```
 
 ## Adding a help text
@@ -26,7 +26,7 @@ You can add a help text to your metric by chaining the `helpText` method.
 ```php
 Prometheus::addGauge('User count')
     ->helpText('This is the number of users in our app')
-    ->value(fn() => User::count();
+    ->value(fn() => User::count());
 ```
 
 ## Setting a namespace
@@ -40,7 +40,7 @@ To change the namespace of a specific gauge, you can chain the `namespace` metho
 ```php
 Prometheus::addGauge('User count')
     ->namespace('My custom namespace')
-    ->value(fn() => User::count();
+    ->value(fn() => User::count());
 ```
 
 The above gauge will be exported as `my_custom_namespace_user_count`.
