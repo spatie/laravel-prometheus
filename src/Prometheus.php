@@ -2,7 +2,6 @@
 
 namespace Spatie\Prometheus;
 
-use Spatie\Prometheus\Actions\RenderCollectorsAction;
 use Spatie\Prometheus\Collectors\Collector;
 use Spatie\Prometheus\MetricTypes\Gauge;
 use Spatie\Prometheus\MetricTypes\MetricType;
@@ -14,10 +13,10 @@ class Prometheus
 
     public function addGauge(
         string $label,
-        float|callable $value = null,
-        string $name = null,
-        string $namespace = null,
-        string $helpText = null,
+        float|callable|null $value = null,
+        ?string $name = null,
+        ?string $namespace = null,
+        ?string $helpText = null,
     ): Gauge {
         $collector = new Gauge($label, $value, $name, $namespace, $helpText);
 
