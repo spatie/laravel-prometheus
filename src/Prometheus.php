@@ -48,6 +48,8 @@ class Prometheus
             ->filter(fn (MetricType $metricType) => $metricType->getUrlName() === $urlName)
             ->toArray();
 
-        return app(RenderCollectorsAction::class)->execute($collectorsForUrlName);
+        $renderCollectorsClass = config('prometheus.actions.render_collectors');
+
+        return app($renderCollectorsClass)->execute($collectorsForUrlName);
     }
 }
