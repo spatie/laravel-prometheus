@@ -29,7 +29,9 @@ class RenderCollectorsAction
 
         $result = $renderer->render($metricSamples);
 
-        $this->registry->wipeStorage();
+        if (config('prometheus.wipe_storage_after_rendering')) {
+            $this->registry->wipeStorage();
+        }
 
         return $result;
     }

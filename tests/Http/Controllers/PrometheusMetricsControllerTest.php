@@ -1,6 +1,7 @@
 <?php
 
 use Spatie\Prometheus\Facades\Prometheus;
+use Spatie\Prometheus\Tests\TestSupport\Actions\TestRenderCollectorsAction;
 
 it('can render a simple gauge', closure: function () {
     Prometheus::addGauge('my gauge', function () {
@@ -82,7 +83,7 @@ it('will not fail with no metric types registered', function () {
     assertPrometheusResultsMatchesSnapshot();
 });
 
-it('will render the gauges on the correct urls', closure: function () {
+it('will render the gauges on the default url', closure: function () {
     config()->set('prometheus.urls', [
         'default' => '/prometheus',
         'alternative' => '/my-alternative-route',
@@ -94,11 +95,32 @@ it('will render the gauges on the correct urls', closure: function () {
     Prometheus::addGauge('my alternative gauge', 123.45)->urlName('alternative');
 
     assertPrometheusResultsMatchesSnapshot();
+});
+
+it('will render the gauges on the alternative url', closure: function () {
+    config()->set('prometheus.urls', [
+        'default' => '/prometheus',
+        'alternative' => '/my-alternative-route',
+    ]);
+
+    $this->reloadServiceProvider();
+
+    Prometheus::addGauge('my default gauge', 123.45);
+    Prometheus::addGauge('my alternative gauge', 123.45)->urlName('alternative');
+
     assertPrometheusResultsMatchesSnapshot('alternative');
 });
 
 it('will convert the gauge name to snake case', closure: function () {
     Prometheus::addGauge('My Gauge', 123.45);
+
+    assertPrometheusResultsMatchesSnapshot();
+});
+
+it('can replace default render collectors action', closure: function () {
+    config()->set('prometheus.actions.render_collectors', TestRenderCollectorsAction::class);
+
+    Prometheus::addGauge('my gauge', 123.45);
 
     assertPrometheusResultsMatchesSnapshot();
 });

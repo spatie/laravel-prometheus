@@ -1,0 +1,4 @@
+# TestRenderCollectorsAction
+# HELP app_my_gauge 
+# TYPE app_my_gauge gauge
+app_my_gauge 123.45

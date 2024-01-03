@@ -26,6 +26,7 @@
     "require-dev": {
         "laravel/horizon": "^5.16.1",
         "laravel/pint": "^1.10",
+        "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^7",
         "larastan/larastan": "^2.6.0",
         "orchestra/testbench": "^8.5.5",
