@@ -39,5 +39,8 @@ return [
         'render_collectors' => Spatie\Prometheus\Actions\RenderCollectorsAction::class,
     ],
 
+    /**
+     * Allow storage to be wiped after a render of data in metrics controller.
+     */
     'wipe_storage_after_rendering' => false,
 ];
