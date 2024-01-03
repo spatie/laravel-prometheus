@@ -38,4 +38,6 @@ return [
     'actions' => [
         'render_collectors' => Spatie\Prometheus\Actions\RenderCollectorsAction::class,
     ],
+
+    'wipe_storage_after_rendering' => false,
 ];
