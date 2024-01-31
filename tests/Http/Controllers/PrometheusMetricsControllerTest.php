@@ -180,7 +180,7 @@ it('can render a counter that returns a multiple results with labels in the clos
 });
 
 it('can render a counter with labels', function () {
-    /** @var \Spatie\Prometheus\MetricTypes\Gauge $counter */
+    /** @var \Spatie\Prometheus\MetricTypes\Counter $counter */
     $counter = Prometheus::addCounter('my counter');
 
     $counter
