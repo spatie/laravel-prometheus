@@ -1,0 +1,4 @@
+# HELP other_namespace_my_counter 
+# TYPE other_namespace_my_counter counter
+other_namespace_my_counter{label_name_1="label_value_1",label_name_2="label_value_2"} 123
+other_namespace_my_counter{label_name_1="label_value_3",label_name_2="label_value_4"} 124
