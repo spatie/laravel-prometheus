@@ -2,6 +2,21 @@
 
 All notable changes to `laravel-prometheus` will be documented in this file.
 
+## 1.1.0 - 2024-03-08
+
+### What's Changed
+
+* Add config setting if the collector registry should be wiped by @ekateiva in https://github.com/spatie/laravel-prometheus/pull/26
+* add ext-redis to dev dependencies by @pselge-5anker in https://github.com/spatie/laravel-prometheus/pull/29
+* Laravel 11 Support by @pselge-5anker in https://github.com/spatie/laravel-prometheus/pull/31
+
+### New Contributors
+
+* @ekateiva made their first contribution in https://github.com/spatie/laravel-prometheus/pull/26
+* @pselge-5anker made their first contribution in https://github.com/spatie/laravel-prometheus/pull/29
+
+**Full Changelog**: https://github.com/spatie/laravel-prometheus/compare/1.0.5...1.1.0
+
 ## 1.0.5 - 2024-01-02
 
 ### What's Changed
