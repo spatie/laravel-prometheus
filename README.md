@@ -31,6 +31,22 @@ You can find full documentation on [our dedicated documentation site](https://do
 
 ## Testing
 
+To run the horizon collector tests you need to install the redis extension.
+
+On Ubuntu you can do so with the following command:
+
+```bash
+sudo apt-get install php-redis
+```
+
+On MacOS you can do so with the following command:
+
+```bash
+pecl install redis
+```
+
+To run the tests call `composer test`:
+
 ```bash
 composer test
 ```

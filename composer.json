@@ -24,6 +24,7 @@
         "spatie/laravel-package-tools": "^1.15.0"
     },
     "require-dev": {
+        "ext-redis": "*",
         "laravel/horizon": "^5.16.1",
         "laravel/pint": "^1.10",
         "mockery/mockery": "^1.6",
