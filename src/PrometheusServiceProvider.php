@@ -63,7 +63,7 @@ class PrometheusServiceProvider extends PackageServiceProvider
         return $this;
     }
 
-    private function buildStorageAdapter(?string $adapter): Adapter
+    protected function buildStorageAdapter(?string $adapter): Adapter
     {
         if ($adapter === null) {
             return new InMemory();

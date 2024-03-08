@@ -6,24 +6,29 @@ use Illuminate\Contracts\Cache\Repository;
 use Prometheus\Counter;
 use Prometheus\Gauge;
 use Prometheus\Histogram;
+use Prometheus\MetricFamilySamples;
 use Prometheus\Storage\InMemory;
 use Prometheus\Summary;
 
 class LaravelCacheAdapter extends InMemory
 {
-    private const CACHE_KEY_PREFIX = 'PROMETHEUS_';
+    protected string $cacheKeyPrefix = 'PROMETHEUS_';
 
-    private const CACHE_KEY_SUFFIX = '_METRICS';
+    protected string $cacheKeySuffix = '_METRICS';
 
-    private const STORES = [Gauge::TYPE, Counter::TYPE, Histogram::TYPE, Summary::TYPE];
+    /** @var string[] */
+    private array $stores = [Gauge::TYPE, Counter::TYPE, Histogram::TYPE, Summary::TYPE];
 
-    public function __construct(private readonly Repository $cache)
+    public function __construct(protected readonly Repository $cache)
     {
     }
 
+    /**
+     * @return MetricFamilySamples[]
+     */
     public function collect(bool $sortMetrics = true): array
     {
-        foreach (self::STORES as $store) {
+        foreach ($this->stores as $store) {
             $this->fetch($store);
         }
 
@@ -61,22 +66,22 @@ class LaravelCacheAdapter extends InMemory
     public function wipeStorage(): void
     {
         $this->cache->deleteMultiple(
-            array_map(fn ($store) => $this->cacheKey($store), self::STORES)
+            array_map(fn ($store) => $this->cacheKey($store), $this->stores)
         );
     }
 
-    private function fetch(string $type): array
+    protected function fetch(string $type): array
     {
         return $this->cache->get($this->cacheKey($type), []);
     }
 
-    private function update(string $type, $data): void
+    protected function update(string $type, $data): void
     {
         $this->cache->put($this->cacheKey($type), $data);
     }
 
-    private function cacheKey(string $type): string
+    protected function cacheKey(string $type): string
     {
-        return self::CACHE_KEY_PREFIX.$type.self::CACHE_KEY_SUFFIX;
+        return $this->cacheKeyPrefix.$type.$this->cacheKeySuffix;
     }
 }
