@@ -46,9 +46,9 @@ class LaravelCacheAdapter extends InMemory
 
     public function updateGauge(array $data): void
     {
-        $this->counters = $this->fetch(Gauge::TYPE);
+        $this->gauges = $this->fetch(Gauge::TYPE);
         parent::updateGauge($data);
-        $this->update(Gauge::TYPE, $this->counters);
+        $this->update(Gauge::TYPE, $this->gauges);
     }
 
     public function updateCounter(array $data): void
