@@ -2,12 +2,15 @@
 
 namespace Spatie\Prometheus;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 use Prometheus\CollectorRegistry;
+use Prometheus\Storage\Adapter;
 use Prometheus\Storage\InMemory;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Spatie\Prometheus\Adapters\LaravelCacheAdapter;
 use Spatie\Prometheus\Http\Controllers\PrometheusMetricsController;
 use Spatie\Prometheus\Http\Middleware\AllowIps;
 
@@ -33,7 +36,10 @@ class PrometheusServiceProvider extends PackageServiceProvider
         $this->app->alias(Prometheus::class, 'prometheus');
 
         $this->app->scoped(CollectorRegistry::class, function () {
-            return new CollectorRegistry(new InMemory(), false);
+            return new CollectorRegistry(
+                $this->buildStorageAdapter(config('prometheus.cache')),
+                false
+            );
         });
     }
 
@@ -55,5 +61,14 @@ class PrometheusServiceProvider extends PackageServiceProvider
         }
 
         return $this;
+    }
+
+    private function buildStorageAdapter(?string $adapter): Adapter
+    {
+        if ($adapter === null) {
+            return new InMemory();
+        }
+
+        return new LaravelCacheAdapter(Cache::resolve($adapter));
     }
 }
