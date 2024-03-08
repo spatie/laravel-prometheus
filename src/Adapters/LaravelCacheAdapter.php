@@ -12,11 +12,14 @@ use Prometheus\Summary;
 class LaravelCacheAdapter extends InMemory
 {
     private const CACHE_KEY_PREFIX = 'PROMETHEUS_';
+
     private const CACHE_KEY_SUFFIX = '_METRICS';
+
     private const STORES = [Gauge::TYPE, Counter::TYPE, Histogram::TYPE, Summary::TYPE];
 
     public function __construct(private readonly Repository $cache)
-    {}
+    {
+    }
 
     public function collect(bool $sortMetrics = true): array
     {
@@ -58,7 +61,7 @@ class LaravelCacheAdapter extends InMemory
     public function wipeStorage(): void
     {
         $this->cache->deleteMultiple(
-            array_map(fn($store) => $this->cacheKey($store), self::STORES)
+            array_map(fn ($store) => $this->cacheKey($store), self::STORES)
         );
     }
 
