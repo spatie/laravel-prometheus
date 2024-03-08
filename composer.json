@@ -18,7 +18,7 @@
     "require": {
         "php": "^8.1",
         "illuminate/config": "*",
-        "illuminate/contracts": "^10.0",
+        "illuminate/contracts": "^10.0|^11.0",
         "illuminate/support": "*",
         "promphp/prometheus_client_php": "^2.7.1",
         "spatie/laravel-package-tools": "^1.15.0"
@@ -27,9 +27,9 @@
         "laravel/horizon": "^5.16.1",
         "laravel/pint": "^1.10",
         "mockery/mockery": "^1.6",
-        "nunomaduro/collision": "^7",
+        "nunomaduro/collision": "^7|^8",
         "larastan/larastan": "^2.6.0",
-        "orchestra/testbench": "^8.5.5",
+        "orchestra/testbench": "^8.5.5|^9",
         "pestphp/pest": "^2.6.2",
         "pestphp/pest-plugin-arch": "^2.2",
         "pestphp/pest-plugin-laravel": "^2.0",
