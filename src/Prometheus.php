@@ -3,6 +3,7 @@
 namespace Spatie\Prometheus;
 
 use Spatie\Prometheus\Collectors\Collector;
+use Spatie\Prometheus\MetricTypes\Counter;
 use Spatie\Prometheus\MetricTypes\Gauge;
 use Spatie\Prometheus\MetricTypes\MetricType;
 
@@ -19,6 +20,20 @@ class Prometheus
         ?string $helpText = null,
     ): Gauge {
         $collector = new Gauge($label, $value, $name, $namespace, $helpText);
+
+        $this->registerCollector($collector);
+
+        return $collector;
+    }
+
+    public function addCounter(
+        string $label,
+        int|callable|null $initialValue = null,
+        ?string $name = null,
+        ?string $namespace = null,
+        ?string $helpText = null,
+    ): Counter {
+        $collector = new Counter(label: $label, initialValue: $initialValue, name: $name, namespace: $namespace, helpText: $helpText);
 
         $this->registerCollector($collector);
 

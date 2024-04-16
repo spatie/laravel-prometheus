@@ -1,0 +1,3 @@
+# HELP app_my_alternative_counter 
+# TYPE app_my_alternative_counter counter
+app_my_alternative_counter 123
