@@ -2,6 +2,20 @@
 
 All notable changes to `laravel-prometheus` will be documented in this file.
 
+## 1.2.1 - 2025-02-14
+
+### What's Changed
+
+* Bump dependabot/fetch-metadata from 2.2.0 to 2.3.0 by @dependabot in https://github.com/spatie/laravel-prometheus/pull/48
+* Bump aglipanci/laravel-pint-action from 2.4 to 2.5 by @dependabot in https://github.com/spatie/laravel-prometheus/pull/49
+* Laravel 12.x Compatibility by @laravel-shift in https://github.com/spatie/laravel-prometheus/pull/50
+
+### New Contributors
+
+* @laravel-shift made their first contribution in https://github.com/spatie/laravel-prometheus/pull/50
+
+**Full Changelog**: https://github.com/spatie/laravel-prometheus/compare/1.2.0...1.2.1
+
 ## 1.2.0 - 2024-08-28
 
 ### What's Changed
