@@ -1,9 +1,19 @@
-# Export Laravel metrics to Prometheus
+<div align="left">
+    <a href="https://spatie.be/open-source?utm_source=github&utm_medium=banner&utm_campaign=laravel-prometheus">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://spatie.be/packages/header/laravel-prometheus/html/dark.webp?1">
+        <img alt="Logo for laravel-prometheus" src=" https://spatie.be/packages/header/laravel-prometheus/html/light.webp?1" height="190">
+      </picture>
+    </a>
+
+<h1>Export Laravel metrics to Prometheus</h1>
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/laravel-prometheus.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-prometheus)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/spatie/laravel-prometheus/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/spatie/laravel-prometheus/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/spatie/laravel-prometheus/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/spatie/laravel-prometheus/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-prometheus.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-prometheus)
+    
+</div>
 
 This package can export key metrics of your app to [Prometheus](https://prometheus.io). It does this by providing an easy way to register metrics. Here's an example where we are going to export the user count to Prometheus.
 
