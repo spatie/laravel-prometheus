@@ -2,7 +2,7 @@
     <a href="https://spatie.be/open-source?utm_source=github&utm_medium=banner&utm_campaign=laravel-prometheus">
       <picture>
         <source media="(prefers-color-scheme: dark)" srcset="https://spatie.be/packages/header/laravel-prometheus/html/dark.webp?1">
-        <img alt="Logo for laravel-prometheus" src=" https://spatie.be/packages/header/laravel-prometheus/html/light.webp?1" height="190">
+        <img alt="Logo for laravel-prometheus" src="https://spatie.be/packages/header/laravel-prometheus/html/light.webp?1" height="190">
       </picture>
     </a>
 
