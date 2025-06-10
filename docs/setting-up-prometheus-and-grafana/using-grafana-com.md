@@ -11,19 +11,19 @@ During this process, you'll install the Grafana agent, which will read the metri
 
 Once your account has been created, you'll be on your account dashboard. There, you should launch your Grafana instance by clicking the "Launch" button.
 
-![Grafana.com dashboard](/docs/laravel-prometheus/v1/images/launch-grafana.jpg)
+![Grafana.com dashboard](/docs/images/launch-grafana.jpg)
 
 At this point, you'll be redirected to your Grafana instance. There, you must go to "Connections" and add a new connection of type "Hosted prometheus Metrics".
 
-![Grafana.com new connection](/docs/laravel-prometheus/v1/images/new-connection.jpg)
+![Grafana.com new connection](/docs/images/new-connection.jpg)
 
 When creating a new connection, choose "Via Grafana Agent".
 
-![Grafana.com agent](/docs/laravel-prometheus/v1/images/grafana-agent.jpg).
+![Grafana.com agent](/docs/images/grafana-agent.jpg).
 
 Next, follow the wizard, install the agent, and create a new config.
 
-![Grafana.com config](/docs/laravel-prometheus/v1/images/new-config.jpg).
+![Grafana.com config](/docs/images/new-config.jpg).
 
 Follow, the steps to create the config file, and start the agent on your server. To keep the agent running, you might use something like [Supervisord](http://supervisord.org) (Laravel Forge users can just create [a daemon](https://forge.laravel.com/docs/1.0/resources/daemons.html))
 
@@ -55,14 +55,14 @@ Once you've configured the agent, you can create a new dashboard. Head over to "
 
 On that screen, click "+ Add Visualization"
 
-![Grafana.com visualization](/docs/laravel-prometheus/v1/images/add-dashboard.jpg).
+![Grafana.com visualization](/docs/images/add-dashboard.jpg).
 
 Next, click your hosted prometheus instance as the source.
 
-![Grafana.com visualization](/docs/laravel-prometheus/v1/images/prometheus-source.jpg).
+![Grafana.com visualization](/docs/images/prometheus-source.jpg).
 
 In the metric dropdown, you should see all the metrics that are being scraped from your Laravel application.
 
-![Grafana.com metrics](/docs/laravel-prometheus/v1/images/metrics.jpg).
+![Grafana.com metrics](/docs/images/metrics.jpg).
 
 From here on, you can create your dashboard as you would normally do in Grafana. For more information on how to create dashboards, please refer to the [Grafana documentation](https://grafana.com/docs/grafana/latest/guides/getting_started/).
