@@ -66,7 +66,7 @@ class PrometheusServiceProvider extends PackageServiceProvider
     protected function buildStorageAdapter(?string $adapter): Adapter
     {
         if ($adapter === null) {
-            return new InMemory();
+            return new InMemory;
         }
 
         return new LaravelCacheAdapter(Cache::resolve($adapter));

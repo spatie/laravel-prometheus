@@ -19,9 +19,7 @@ class LaravelCacheAdapter extends InMemory
     /** @var string[] */
     private array $stores = [Gauge::TYPE, Counter::TYPE, Histogram::TYPE, Summary::TYPE];
 
-    public function __construct(protected readonly Repository $cache)
-    {
-    }
+    public function __construct(protected readonly Repository $cache) {}
 
     /**
      * @return MetricFamilySamples[]

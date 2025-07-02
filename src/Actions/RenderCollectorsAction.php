@@ -8,10 +8,7 @@ use Spatie\Prometheus\MetricTypes\MetricType;
 
 class RenderCollectorsAction
 {
-    public function __construct(protected CollectorRegistry $registry)
-    {
-
-    }
+    public function __construct(protected CollectorRegistry $registry) {}
 
     public function execute(array $collectors): string
     {
@@ -23,7 +20,7 @@ class RenderCollectorsAction
 
     protected function renderRegistry(): string
     {
-        $renderer = new RenderTextFormat();
+        $renderer = new RenderTextFormat;
 
         $metricSamples = $this->registry->getMetricFamilySamples();
 
