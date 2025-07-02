@@ -30,7 +30,7 @@
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^7|^8",
         "larastan/larastan": "^2.6.0|^3.0",
-        "orchestra/testbench": "^8.5.5|^9|^10.0",
+        "orchestra/testbench": "^7.0|^8.5.5|^9|^10.0",
         "pestphp/pest": "^2.6.2|^3.0",
         "pestphp/pest-plugin-arch": "^2.0|^3.0",
         "pestphp/pest-plugin-laravel": "^2.0|^3.0",
