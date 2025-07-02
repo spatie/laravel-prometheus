@@ -13,5 +13,5 @@ function assertPrometheusResultsMatchesSnapshot(string $urlName = 'default')
         ->assertSuccessful()
         ->content();
 
-    assertMatchesSnapshot($content);
+    assertMatchesSnapshot(str($content)->trim()->value());
 }
