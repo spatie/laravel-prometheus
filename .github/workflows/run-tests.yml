@@ -10,12 +10,11 @@ on:
 
 jobs:
   test:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
 
     strategy:
       fail-fast: true
       matrix:
-        os: [ubuntu-latest]
         php: [8.3, 8.4]
         laravel: ['11.*', '12.*']
         stability: [prefer-lowest, prefer-stable]
@@ -25,7 +24,7 @@ jobs:
           - laravel: 10.*
             carbon: ^2.63
 
-    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }}
 
     services:
       redis:
