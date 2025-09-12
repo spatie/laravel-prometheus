@@ -2,6 +2,24 @@
 
 All notable changes to `laravel-prometheus` will be documented in this file.
 
+## 1.2.2 - 2025-09-12
+
+### What's Changed
+
+* Bump dependabot/fetch-metadata from 2.3.0 to 2.4.0 by @dependabot[bot] in https://github.com/spatie/laravel-prometheus/pull/54
+* Update requirements.md by @oralunal in https://github.com/spatie/laravel-prometheus/pull/55
+* Fix image paths in documentation for Grafana integration by @eura-app in https://github.com/spatie/laravel-prometheus/pull/56
+* Bump aglipanci/laravel-pint-action from 2.5 to 2.6 by @dependabot[bot] in https://github.com/spatie/laravel-prometheus/pull/60
+* adds missing facade counter typehint by @vladislavs-poznaks in https://github.com/spatie/laravel-prometheus/pull/65
+
+### New Contributors
+
+* @oralunal made their first contribution in https://github.com/spatie/laravel-prometheus/pull/55
+* @eura-app made their first contribution in https://github.com/spatie/laravel-prometheus/pull/56
+* @vladislavs-poznaks made their first contribution in https://github.com/spatie/laravel-prometheus/pull/65
+
+**Full Changelog**: https://github.com/spatie/laravel-prometheus/compare/1.2.1...1.2.2
+
 ## 1.2.1 - 2025-02-14
 
 ### What's Changed
