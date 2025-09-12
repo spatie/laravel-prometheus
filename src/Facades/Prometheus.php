@@ -9,6 +9,7 @@ use Spatie\Prometheus\MetricTypes\MetricType;
  * @see \Spatie\Prometheus\Prometheus
  *
  * @method static \Spatie\Prometheus\MetricTypes\Gauge addGauge(string $name)
+ * @method static \Spatie\Prometheus\MetricTypes\Counter addCounter(string $name)
  * @method static \Spatie\Prometheus\Prometheus registerCollector(MetricType $collector)
  * @method static \Spatie\Prometheus\Prometheus registerCollectorClasses(array $collectors)
  * @method static string renderCollectors(string $urlName = 'default')
