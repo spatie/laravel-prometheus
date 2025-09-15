@@ -50,11 +50,11 @@ class Prometheus
     public function registerCollectorClasses(array $collectors, array $constructorParameters = []): self
     {
         collect($collectors)
-            ->map(fn(string $collectorClass) => empty($constructorParameters)
+            ->map(fn (string $collectorClass) => empty($constructorParameters)
                 ? app($collectorClass)
                 : new $collectorClass(...$constructorParameters)
             )
-            ->each(fn(Collector $collector) => $collector->register());
+            ->each(fn (Collector $collector) => $collector->register());
 
         return $this;
     }
@@ -62,7 +62,7 @@ class Prometheus
     public function renderCollectors(string $urlName = 'default'): string
     {
         $collectorsForUrlName = collect($this->collectors)
-            ->filter(fn(MetricType $metricType) => $metricType->getUrlName() === $urlName)
+            ->filter(fn (MetricType $metricType) => $metricType->getUrlName() === $urlName)
             ->toArray();
 
         $renderCollectorsClass = config('prometheus.actions.render_collectors');
