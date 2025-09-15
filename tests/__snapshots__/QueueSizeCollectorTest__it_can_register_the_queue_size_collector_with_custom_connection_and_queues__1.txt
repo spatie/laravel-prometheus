@@ -1,0 +1,4 @@
+# HELP app_queue_size The total number of jobs in the queue
+# TYPE app_queue_size gauge
+app_queue_size{connection="redis",queue="high"} 0
+app_queue_size{connection="redis",queue="low"} 0

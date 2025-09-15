@@ -1,0 +1,3 @@
+# HELP app_queue_delayed_jobs The number of delayed jobs in the queue
+# TYPE app_queue_delayed_jobs gauge
+app_queue_delayed_jobs{connection="sync",queue="default"} 0

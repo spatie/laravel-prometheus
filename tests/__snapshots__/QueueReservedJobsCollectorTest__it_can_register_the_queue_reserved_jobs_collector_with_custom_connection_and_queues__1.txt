@@ -1,0 +1,4 @@
+# HELP app_queue_reserved_jobs The number of reserved jobs in the queue
+# TYPE app_queue_reserved_jobs gauge
+app_queue_reserved_jobs{connection="redis",queue="high"} 0
+app_queue_reserved_jobs{connection="redis",queue="low"} 0

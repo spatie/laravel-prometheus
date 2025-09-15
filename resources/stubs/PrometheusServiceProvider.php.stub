@@ -10,6 +10,11 @@ use Spatie\Prometheus\Collectors\Horizon\FailedJobsPerHourCollector;
 use Spatie\Prometheus\Collectors\Horizon\HorizonStatusCollector;
 use Spatie\Prometheus\Collectors\Horizon\JobsPerMinuteCollector;
 use Spatie\Prometheus\Collectors\Horizon\RecentJobsCollector;
+use Spatie\Prometheus\Collectors\Queue\QueueDelayedJobsCollector;
+use Spatie\Prometheus\Collectors\Queue\QueueOldestPendingJobCollector;
+use Spatie\Prometheus\Collectors\Queue\QueuePendingJobsCollector;
+use Spatie\Prometheus\Collectors\Queue\QueueReservedJobsCollector;
+use Spatie\Prometheus\Collectors\Queue\QueueSizeCollector;
 use Spatie\Prometheus\Facades\Prometheus;
 
 class PrometheusServiceProvider extends ServiceProvider
@@ -30,6 +35,12 @@ class PrometheusServiceProvider extends ServiceProvider
          * all Horizon metrics to prometheus
          */
         // $this->registerHorizonCollectors();
+
+        /*
+         * Uncomment this line if you want to export queue metrics to Prometheus.
+         * You need to pass an array of queues to monitor.
+         */
+        // $this->registerQueueCollectors(['default']);
     }
 
     public function registerHorizonCollectors(): self
@@ -43,6 +54,19 @@ class PrometheusServiceProvider extends ServiceProvider
             JobsPerMinuteCollector::class,
             RecentJobsCollector::class,
         ]);
+
+        return $this;
+    }
+
+    public function registerQueueCollectors(array $queues = [], ?string $connection = null): self
+    {
+        Prometheus::registerCollectorClasses([
+            QueueSizeCollector::class,
+            QueuePendingJobsCollector::class,
+            QueueDelayedJobsCollector::class,
+            QueueReservedJobsCollector::class,
+            QueueOldestPendingJobCollector::class,
+        ], compact('connection', 'queues'));
 
         return $this;
     }

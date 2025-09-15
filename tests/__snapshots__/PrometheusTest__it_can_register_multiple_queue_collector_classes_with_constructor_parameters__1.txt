@@ -1,0 +1,5 @@
+# HELP app_queue_size The total number of jobs in the queue
+# TYPE app_queue_size gauge
+app_queue_size{connection="database",queue="critical"} 0
+app_queue_size{connection="database",queue="low"} 0
+app_queue_size{connection="database",queue="normal"} 0

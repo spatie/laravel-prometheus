@@ -1,0 +1,3 @@
+# HELP app_queue_reserved_jobs The number of reserved jobs in the queue
+# TYPE app_queue_reserved_jobs gauge
+app_queue_reserved_jobs{connection="sync",queue="default"} 0

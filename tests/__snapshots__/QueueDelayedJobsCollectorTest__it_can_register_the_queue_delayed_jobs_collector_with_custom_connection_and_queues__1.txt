@@ -1,0 +1,4 @@
+# HELP app_queue_delayed_jobs The number of delayed jobs in the queue
+# TYPE app_queue_delayed_jobs gauge
+app_queue_delayed_jobs{connection="redis",queue="high"} 0
+app_queue_delayed_jobs{connection="redis",queue="low"} 0
