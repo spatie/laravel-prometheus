@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-prometheus` will be documented in this file.
 
+## 1.3.0 - 2025-09-15
+
+### What's Changed
+
+* Add vanilla Laravel queue exports
+
+**Full Changelog**: https://github.com/spatie/laravel-prometheus/compare/1.2.2...1.3.0
+
 ## 1.2.2 - 2025-09-12
 
 ### What's Changed
