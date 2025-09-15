@@ -15,7 +15,9 @@
     
 </div>
 
-This package can export key metrics of your app to [Prometheus](https://prometheus.io). It does this by providing an easy way to register metrics. Here's an example where we are going to export the user count to Prometheus.
+This package can export key metrics of your app to [Prometheus](https://prometheus.io). It does this by providing an easy way to register metrics and comes out of the box with metrics for Laravel queues and Horizon.
+
+Here's an example where we are going to export the user count to Prometheus.
 
 ```php
 Prometheus::addGauge('User count')
