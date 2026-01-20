@@ -5,11 +5,14 @@ namespace Spatie\Prometheus\MetricTypes;
 use Closure;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Illuminate\Support\Traits\Conditionable;
 use Prometheus\CollectorRegistry;
 use Prometheus\Counter as PrometheusCounter;
 
 class Counter implements MetricType
 {
+    use Conditionable;
+
     protected array $values = [];
 
     public function __construct(

@@ -1,6 +1,7 @@
 <?php
 
 use Spatie\Prometheus\Facades\Prometheus;
+use Spatie\Prometheus\MetricTypes\Gauge;
 use Spatie\Prometheus\Tests\TestSupport\Actions\TestRenderCollectorsAction;
 
 it('can render a simple gauge', closure: function () {
@@ -29,7 +30,7 @@ it('can render a gauge with all options', function () {
     /** @var \Spatie\Prometheus\MetricTypes\Gauge $gauge */
     Prometheus::addGauge('my gauge')
         ->namespace('other_namespace')
-        ->helpText('This is the help text')
+        ->when(true, fn (Gauge $gauge): Gauge => $gauge->helpText('This is the help text'))
         ->name('alternative_name')
         ->value(123.45);
 
