@@ -2,6 +2,22 @@
 
 All notable changes to `laravel-prometheus` will be documented in this file.
 
+## 2.0.0 - 2026-01-26
+
+### Breaking Changes
+- Dropped Laravel 10 support (EOL February 2025)
+- Minimum requirements: Laravel 11+, PHP 8.3+
+- Removed prefer-lowest testing strategy
+
+### What's Changed
+- Add `Conditionable` trait to Gauge and Counter for fluent conditional operations by @Ma-ve in https://github.com/spatie/laravel-prometheus/pull/69
+- Add CONTRIBUTING.md file and restore Contributing section in README
+- Clean up docs: remove outdated 'Using cached values' placeholder page
+- Bump minimum dependencies to Laravel 11+ compatible versions
+- Update test matrix to Laravel 11 and 12 only with stable dependencies
+
+**Full Changelog**: https://github.com/spatie/laravel-prometheus/compare/1.3.0...2.0.0
+
 ## 1.3.0 - 2025-09-15
 
 ### What's Changed
