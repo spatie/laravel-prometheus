@@ -17,7 +17,7 @@ jobs:
       matrix:
         php: [8.3, 8.4]
         laravel: ['11.*', '12.*']
-        stability: [prefer-lowest, prefer-stable]
+        stability: [prefer-stable]
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }}
 
