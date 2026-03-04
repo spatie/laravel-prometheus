@@ -45,6 +45,13 @@ return [
     'wipe_storage_after_rendering' => false,
 
     /**
+     * Use a StreamedResponse instead of a regular Response for the metrics endpoint.
+     * This prevents "headers already sent" deprecations when the rendered metrics
+     * payload is large enough for PHP to begin flushing output before sendHeaders().
+     */
+    'use_streamed_response' => false,
+
+    /**
      * Select a cache to store gauges, counters, summaries and histograms between requests.
      * In a multi node setup you should ensure that each node writes to its own
      * cache instance or uses a node specific prefix.

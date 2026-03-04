@@ -226,3 +226,17 @@ it('will convert the counter name to snake case', closure: function () {
 
     assertPrometheusResultsMatchesSnapshot();
 });
+
+it('can render metrics using a streamed response', function () {
+    config()->set('prometheus.use_streamed_response', true);
+
+    Prometheus::addGauge('my gauge', 123.45);
+
+    $response = $this
+        ->get(route('prometheus.default'))
+        ->assertSuccessful();
+
+    expect($response->baseResponse)->toBeInstanceOf(\Symfony\Component\HttpFoundation\StreamedResponse::class);
+    expect($response->headers->get('Content-Type'))->toContain(\Prometheus\RenderTextFormat::MIME_TYPE);
+    expect($response->streamedContent())->toContain('app_my_gauge 123.45');
+});
