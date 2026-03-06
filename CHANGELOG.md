@@ -2,9 +2,18 @@
 
 All notable changes to `laravel-prometheus` will be documented in this file.
 
+## 1.5.0 - 2026-03-06
+
+### What's Changed
+
+- Laravel 13.x Compatibility
+- Drop support for PHP < 8.4 and Laravel < 12
+- Update to Pest 4
+
 ## 1.4.0 - 2026-01-26
 
 ### What's Changed
+
 - Add `Conditionable` trait to Gauge and Counter for fluent conditional operations by @Ma-ve in https://github.com/spatie/laravel-prometheus/pull/69
 - Add CONTRIBUTING.md file and restore Contributing section in README
 - Clean up docs: remove outdated 'Using cached values' placeholder page
@@ -13,6 +22,7 @@ All notable changes to `laravel-prometheus` will be documented in this file.
 - Update test matrix to Laravel 11 and 12 only with stable dependencies
 
 ### New Contributors
+
 - @Ma-ve made their first contribution in https://github.com/spatie/laravel-prometheus/pull/69
 
 **Full Changelog**: https://github.com/spatie/laravel-prometheus/compare/1.3.0...1.4.0
