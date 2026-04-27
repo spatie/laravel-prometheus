@@ -6,15 +6,12 @@ use Laravel\Horizon\Contracts\JobRepository;
 use Spatie\Prometheus\Collectors\Collector;
 use Spatie\Prometheus\Facades\Prometheus;
 
-/**
- * @deprecated Use FailedRecentJobsCollector instead.
- */
-class FailedJobsPerHourCollector implements Collector
+class FailedRecentJobsCollector implements Collector
 {
     public function register(): void
     {
-        Prometheus::addGauge('Failed Jobs Per Hour')
-            ->name('horizon_failed_jobs_per_hour')
+        Prometheus::addGauge('Failed Recent Jobs')
+            ->name('horizon_failed_recent_jobs')
             ->helpText('The number of recently failed jobs')
             ->value(fn () => app(JobRepository::class)->countRecentlyFailed());
     }

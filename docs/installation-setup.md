@@ -70,7 +70,7 @@ use Illuminate\Support\ServiceProvider;
 use Spatie\Prometheus\Collectors\Horizon\CurrentMasterSupervisorCollector;
 use Spatie\Prometheus\Collectors\Horizon\CurrentProcessesPerQueueCollector;
 use Spatie\Prometheus\Collectors\Horizon\CurrentWorkloadCollector;
-use Spatie\Prometheus\Collectors\Horizon\FailedJobsPerHourCollector;
+use Spatie\Prometheus\Collectors\Horizon\FailedRecentJobsCollector;
 use Spatie\Prometheus\Collectors\Horizon\HorizonStatusCollector;
 use Spatie\Prometheus\Collectors\Horizon\JobsPerMinuteCollector;
 use Spatie\Prometheus\Collectors\Horizon\RecentJobsCollector;
@@ -101,7 +101,7 @@ class PrometheusServiceProvider extends ServiceProvider
             CurrentMasterSupervisorCollector::class,
             CurrentProcessesPerQueueCollector::class,
             CurrentWorkloadCollector::class,
-            FailedJobsPerHourCollector::class,
+            FailedRecentJobsCollector::class,
             HorizonStatusCollector::class,
             JobsPerMinuteCollector::class,
             RecentJobsCollector::class,
