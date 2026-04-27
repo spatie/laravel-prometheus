@@ -9,7 +9,7 @@ use Spatie\Prometheus\MetricTypes\MetricType;
 
 class Prometheus
 {
-    /** @var array<\Spatie\Prometheus\MetricTypes\MetricType> */
+    /** @var array<MetricType> */
     protected array $collectors = [];
 
     public function addGauge(
