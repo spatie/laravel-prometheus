@@ -6,6 +6,9 @@ use Laravel\Horizon\Contracts\JobRepository;
 use Spatie\Prometheus\Collectors\Collector;
 use Spatie\Prometheus\Facades\Prometheus;
 
+/**
+ * @deprecated Use FailedRecentJobsCollector instead.
+ */
 class FailedJobsPerHourCollector implements Collector
 {
     public function register(): void
