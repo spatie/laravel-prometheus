@@ -78,7 +78,7 @@ use Spatie\Prometheus\Facades\Prometheus;
 
 class PrometheusServiceProvider extends ServiceProvider
 {
-    public function register()
+    public function register(): void
     {
         /*
          * Here you can register all the exporters that you

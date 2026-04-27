@@ -16,7 +16,7 @@ use Spatie\Prometheus\MetricTypes\MetricType;
  */
 class Prometheus extends Facade
 {
-    protected static function getFacadeAccessor()
+    protected static function getFacadeAccessor(): string
     {
         return \Spatie\Prometheus\Prometheus::class;
     }

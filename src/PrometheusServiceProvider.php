@@ -30,7 +30,7 @@ class PrometheusServiceProvider extends PackageServiceProvider
             ->hasConfigFile();
     }
 
-    public function packageRegistered()
+    public function packageRegistered(): void
     {
         $this->app->singleton(Prometheus::class);
         $this->app->alias(Prometheus::class, 'prometheus');
@@ -43,7 +43,7 @@ class PrometheusServiceProvider extends PackageServiceProvider
         });
     }
 
-    public function packageBooted()
+    public function packageBooted(): void
     {
         $this->registerUrls();
     }
