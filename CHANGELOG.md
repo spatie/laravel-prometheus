@@ -2,6 +2,11 @@
 
 All notable changes to `laravel-prometheus` will be documented in this file.
 
+## 1.6.1 - 2026-07-28
+
+- Update `@method` annotations on the `Prometheus` facade so PHPStan/Larastan no longer reports `arguments.count` errors for `registerCollectorClasses()`, `addGauge()` and `addCounter()` (#78)
+- Add explicit return types to service provider and facade methods (#73)
+
 ## 1.5.0 - 2026-03-06
 
 ### What's Changed
