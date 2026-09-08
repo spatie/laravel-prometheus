@@ -1,16 +1,13 @@
 <?php
 
 use Illuminate\Contracts\Queue\Factory;
-use Illuminate\Contracts\Queue\Queue;
 use Spatie\Prometheus\Collectors\Queue\QueueOldestPendingJobCollector;
+use Spatie\Prometheus\Tests\TestSupport\Queue\FakeQueue;
 
 function fakeQueueConnection(Closure $creationTimeOfOldestPendingJob): void
 {
-    $queue = Mockery::mock(Queue::class);
-    $queue->shouldReceive('creationTimeOfOldestPendingJob')->andReturnUsing($creationTimeOfOldestPendingJob);
-
     $factory = Mockery::mock(Factory::class);
-    $factory->shouldReceive('connection')->andReturn($queue);
+    $factory->shouldReceive('connection')->andReturn(new FakeQueue($creationTimeOfOldestPendingJob));
 
     app()->instance(Factory::class, $factory);
 }
