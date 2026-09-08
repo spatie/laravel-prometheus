@@ -2,6 +2,7 @@
 
 namespace Spatie\Prometheus\Collectors\Queue;
 
+use Exception;
 use Illuminate\Contracts\Queue\Factory;
 use Spatie\Prometheus\Collectors\Collector;
 use Spatie\Prometheus\Facades\Prometheus;
@@ -35,18 +36,19 @@ class QueueOldestPendingJobCollector implements Collector
                     try {
                         $queueConnection = $manager->connection($this->connection);
 
-                        if (method_exists($queueConnection, 'creationTimeOfOldestPendingJob')) {
-                            $oldestJobTime = $queueConnection->creationTimeOfOldestPendingJob($queueName);
-                        } else {
-                            $oldestJobTime = null;
+                        if (! method_exists($queueConnection, 'creationTimeOfOldestPendingJob')) {
+                            continue;
                         }
 
-                        if ($oldestJobTime !== null) {
-                            $ageInSeconds = now()->timestamp - $oldestJobTime;
-                            $results[] = [$ageInSeconds, [$this->connection, $queueName]];
-                        }
-                    } catch (\Exception $e) {
-                        // Skip this queue if there's an error
+                        $oldestJobTime = $queueConnection->creationTimeOfOldestPendingJob($queueName);
+
+                        $ageInSeconds = $oldestJobTime === null
+                            ? 0
+                            : now()->timestamp - $oldestJobTime;
+
+                        $results[] = [$ageInSeconds, [$this->connection, $queueName]];
+                    } catch (Exception) {
+                        // Reporting no value at all is better than reporting an age we could not read
                     }
                 }
 
