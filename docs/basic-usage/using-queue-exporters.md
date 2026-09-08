@@ -17,7 +17,7 @@ This will register the following collectors for monitoring your Laravel queues:
 - `queue_pending_jobs`: exports the number of pending jobs per queue
 - `queue_delayed_jobs`: exports the number of delayed jobs per queue (supported drivers)
 - `queue_reserved_jobs`: exports the number of reserved jobs per queue
-- `queue_oldest_pending_job_age`: exports the age of the oldest pending job in seconds (supported drivers)
+- `queue_oldest_pending_job_age`: exports the age of the oldest pending job in seconds (supported drivers). A queue without pending jobs reports `0`. When a queue cannot be read, no value is reported for it at all, so a failed read never looks like an empty queue.
 
 ## Configuration
 
