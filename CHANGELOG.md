@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-prometheus` will be documented in this file.
 
+## 1.7.0 - 2026-09-08
+
+### Fixed
+
+- `queue_oldest_pending_job_age` now reports `0` for a queue without pending jobs instead of leaving the previous value in place, which made the metric freeze at a stale age on a persistent cache adapter (#80, #81)
+
+A queue that cannot be read still reports no value at all, so a failed read never looks like an empty queue.
+
 ## 1.6.1 - 2026-07-28
 
 - Update `@method` annotations on the `Prometheus` facade so PHPStan/Larastan no longer reports `arguments.count` errors for `registerCollectorClasses()`, `addGauge()` and `addCounter()` (#78)
