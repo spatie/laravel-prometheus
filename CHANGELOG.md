@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-prometheus` will be documented in this file.
 
+## 1.7.1 - 2026-09-28
+
+### What's Changed
+
+* Load cached metrics in LaravelCacheAdapter::collect() by @freekmurze in https://github.com/spatie/laravel-prometheus/pull/83
+
+**Full Changelog**: https://github.com/spatie/laravel-prometheus/compare/1.7.0...1.7.1
+
 ## 1.7.0 - 2026-09-08
 
 ### Fixed
