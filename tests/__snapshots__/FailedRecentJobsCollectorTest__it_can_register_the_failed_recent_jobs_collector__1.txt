@@ -1,3 +1,0 @@
-# HELP app_horizon_failed_recent_jobs The number of recently failed jobs
-# TYPE app_horizon_failed_recent_jobs gauge
-app_horizon_failed_recent_jobs 0
