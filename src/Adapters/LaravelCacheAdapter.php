@@ -26,9 +26,10 @@ class LaravelCacheAdapter extends InMemory
      */
     public function collect(bool $sortMetrics = true): array
     {
-        foreach ($this->stores as $store) {
-            $this->fetch($store);
-        }
+        $this->gauges = $this->fetch(Gauge::TYPE);
+        $this->counters = $this->fetch(Counter::TYPE);
+        $this->histograms = $this->fetch(Histogram::TYPE);
+        $this->summaries = $this->fetch(Summary::TYPE);
 
         return parent::collect($sortMetrics);
     }
