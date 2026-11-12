@@ -59,4 +59,11 @@ return [
      *  'cache' => 'array'    // InMemory implementation using laravel cache
      */
     'cache' => null,
+
+    /*
+     * When metrics are stored in a cache, update them under a cache lock, so that increments from concurrent
+     * requests, queue workers or Octane workers don't overwrite each other. Each update then takes about twice
+     * as long (two more round trips to the cache store). Needs a cache store that supports locks.
+     */
+    'cache_lock' => false,
 ];
