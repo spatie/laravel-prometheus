@@ -132,3 +132,31 @@ it('rejects stores without lock support when locking is enabled', function () {
     expect(fn () => $registry->getOrRegisterCounter('app', 'test_counter', 'help')->inc())
         ->toThrow(InvalidArgumentException::class, 'The configured Prometheus cache store does not support locks.');
 });
+
+it('releases the lock when a cache write fails without retrying the update', function () {
+    $store = new class extends ArrayStore
+    {
+        public bool $failNextWrite = true;
+
+        public function forever($key, $value): bool
+        {
+            if ($this->failNextWrite) {
+                $this->failNextWrite = false;
+
+                throw new LockTimeoutException('Cache write failed.');
+            }
+
+            return parent::forever($key, $value);
+        }
+    };
+    $cache = new Repository($store);
+    $registry = new CollectorRegistry(new LaravelCacheAdapter($cache, true), false);
+    $counter = $registry->getOrRegisterCounter('app', 'test_counter', 'help');
+
+    expect(fn () => $counter->incBy(7))->toThrow(LockTimeoutException::class, 'Cache write failed.');
+    expect($registry->getMetricFamilySamples())->toBeEmpty();
+
+    $counter->incBy(3);
+
+    expect($registry->getMetricFamilySamples()[0]->getSamples()[0]->getValue())->toEqual(3);
+});
