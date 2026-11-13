@@ -69,6 +69,6 @@ class PrometheusServiceProvider extends PackageServiceProvider
             return new InMemory;
         }
 
-        return new LaravelCacheAdapter(Cache::resolve($adapter));
+        return new LaravelCacheAdapter(Cache::resolve($adapter), (bool) config('prometheus.cache_lock', false));
     }
 }

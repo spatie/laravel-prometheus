@@ -77,5 +77,21 @@ You can configure the cache in the config/prometheus.php file:
   'cache' => 'redis', // Using Redis for caching metrics
   ```
 
+### Concurrent updates
+
+Cached metrics are read, changed and written back. Concurrent requests, queue workers or Octane workers can overwrite each other's updates, even when they update different metrics of the same type.
+
+Enable `cache_lock` in `config/prometheus.php` to serialize updates per metric type:
+
+```php
+'cache_lock' => true,
+```
+
+All writers sharing the metrics must enable this option and use the same shared cache and lock store. Array stores only coordinate within one process; file stores require a shared filesystem. Acquiring and releasing a lock adds cache operations to each update.
+
+When enabled, an update waits up to 3 seconds to acquire the lock. If it times out, Laravel's `Illuminate\Contracts\Cache\LockTimeoutException` is thrown and the metric is not updated. Stores without lock support throw `InvalidArgumentException`. There is no unlocked fallback. Leave `cache_lock` disabled if you prefer the previous best-effort behavior.
+
+Locks expire after 5 seconds to recover from terminated workers. Updates must finish within that lease; slower updates can still overlap after it expires. Locking does not make collecting and wiping metrics atomic, so avoid `wipe_storage_after_rendering` when concurrent writers must retain every update.
+
 ### Conclusion
 By properly configuring the cache, you can ensure that your metrics are persisted and shared across requests, making them more reliable in production environments.

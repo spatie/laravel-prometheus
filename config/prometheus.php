@@ -59,4 +59,11 @@ return [
      *  'cache' => 'array'    // InMemory implementation using laravel cache
      */
     'cache' => null,
+
+    /*
+     * Lock each metric type while updating cached metrics to prevent concurrent
+     * writers from overwriting each other. Requires a cache store with lock support.
+     * Throws if the lock cannot be acquired within 3 seconds or is unsupported.
+     */
+    'cache_lock' => false,
 ];

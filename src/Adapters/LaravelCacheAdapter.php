@@ -2,7 +2,10 @@
 
 namespace Spatie\Prometheus\Adapters;
 
+use Closure;
+use Illuminate\Contracts\Cache\LockProvider;
 use Illuminate\Contracts\Cache\Repository;
+use InvalidArgumentException;
 use Prometheus\Counter;
 use Prometheus\Gauge;
 use Prometheus\Histogram;
@@ -19,7 +22,10 @@ class LaravelCacheAdapter extends InMemory
     /** @var string[] */
     private array $stores = [Gauge::TYPE, Counter::TYPE, Histogram::TYPE, Summary::TYPE];
 
-    public function __construct(protected readonly Repository $cache) {}
+    public function __construct(
+        protected readonly Repository $cache,
+        protected readonly bool $lock = false,
+    ) {}
 
     /**
      * @return MetricFamilySamples[]
@@ -36,30 +42,38 @@ class LaravelCacheAdapter extends InMemory
 
     public function updateSummary(array $data): void
     {
-        $this->summaries = $this->fetch(Summary::TYPE);
-        parent::updateSummary($data);
-        $this->update(Summary::TYPE, $this->summaries);
+        $this->locked(Summary::TYPE, function () use ($data) {
+            $this->summaries = $this->fetch(Summary::TYPE);
+            parent::updateSummary($data);
+            $this->update(Summary::TYPE, $this->summaries);
+        });
     }
 
     public function updateHistogram(array $data): void
     {
-        $this->histograms = $this->fetch(Histogram::TYPE);
-        parent::updateHistogram($data);
-        $this->update(Histogram::TYPE, $this->histograms);
+        $this->locked(Histogram::TYPE, function () use ($data) {
+            $this->histograms = $this->fetch(Histogram::TYPE);
+            parent::updateHistogram($data);
+            $this->update(Histogram::TYPE, $this->histograms);
+        });
     }
 
     public function updateGauge(array $data): void
     {
-        $this->gauges = $this->fetch(Gauge::TYPE);
-        parent::updateGauge($data);
-        $this->update(Gauge::TYPE, $this->gauges);
+        $this->locked(Gauge::TYPE, function () use ($data) {
+            $this->gauges = $this->fetch(Gauge::TYPE);
+            parent::updateGauge($data);
+            $this->update(Gauge::TYPE, $this->gauges);
+        });
     }
 
     public function updateCounter(array $data): void
     {
-        $this->counters = $this->fetch(Counter::TYPE);
-        parent::updateCounter($data);
-        $this->update(Counter::TYPE, $this->counters);
+        $this->locked(Counter::TYPE, function () use ($data) {
+            $this->counters = $this->fetch(Counter::TYPE);
+            parent::updateCounter($data);
+            $this->update(Counter::TYPE, $this->counters);
+        });
     }
 
     public function wipeStorage(): void
@@ -67,6 +81,23 @@ class LaravelCacheAdapter extends InMemory
         $this->cache->deleteMultiple(
             array_map(fn ($store) => $this->cacheKey($store), $this->stores)
         );
+    }
+
+    protected function locked(string $type, Closure $update): void
+    {
+        if (! $this->lock) {
+            $update();
+
+            return;
+        }
+
+        $store = $this->cache->getStore();
+
+        if (! $store instanceof LockProvider) {
+            throw new InvalidArgumentException('The configured Prometheus cache store does not support locks.');
+        }
+
+        $store->lock($this->cacheKey($type).'_LOCK', 5)->block(3, $update);
     }
 
     protected function fetch(string $type): array
