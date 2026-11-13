@@ -3,7 +3,6 @@
 namespace Spatie\Prometheus\Adapters;
 
 use Closure;
-use Illuminate\Cache\Lock;
 use Illuminate\Contracts\Cache\LockProvider;
 use Illuminate\Contracts\Cache\Repository;
 use InvalidArgumentException;
@@ -22,10 +21,6 @@ class LaravelCacheAdapter extends InMemory
 
     /** @var string[] */
     private array $stores = [Gauge::TYPE, Counter::TYPE, Histogram::TYPE, Summary::TYPE];
-
-    protected int $lockSeconds = 5;
-
-    protected int $lockWaitSeconds = 3;
 
     public function __construct(
         protected readonly Repository $cache,
@@ -102,13 +97,7 @@ class LaravelCacheAdapter extends InMemory
             throw new InvalidArgumentException('The configured Prometheus cache store does not support locks.');
         }
 
-        $lock = $store->lock($this->cacheKey($type).'_LOCK', $this->lockSeconds);
-
-        if ($lock instanceof Lock) {
-            $lock->betweenBlockedAttemptsSleepFor(10);
-        }
-
-        $lock->block($this->lockWaitSeconds, $update);
+        $store->lock($this->cacheKey($type).'_LOCK', 5)->block(3, $update);
     }
 
     protected function fetch(string $type): array
