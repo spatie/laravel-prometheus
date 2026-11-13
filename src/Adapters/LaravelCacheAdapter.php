@@ -5,8 +5,8 @@ namespace Spatie\Prometheus\Adapters;
 use Closure;
 use Illuminate\Cache\Lock;
 use Illuminate\Contracts\Cache\LockProvider;
-use Illuminate\Contracts\Cache\LockTimeoutException;
 use Illuminate\Contracts\Cache\Repository;
+use InvalidArgumentException;
 use Prometheus\Counter;
 use Prometheus\Gauge;
 use Prometheus\Histogram;
@@ -23,16 +23,14 @@ class LaravelCacheAdapter extends InMemory
     /** @var string[] */
     private array $stores = [Gauge::TYPE, Counter::TYPE, Histogram::TYPE, Summary::TYPE];
 
-    /** How long an update holds the lock at most, so that a process that dies holding it does not block others for long. */
     protected int $lockSeconds = 5;
 
-    /** How long an update waits for the lock before it updates without it. */
     protected int $lockWaitSeconds = 3;
 
-    /**
-     * @param  bool  $lock  Whether to update under a cache lock, so that concurrent updates from other processes are not lost
-     */
-    public function __construct(protected readonly Repository $cache, protected readonly bool $lock = false) {}
+    public function __construct(
+        protected readonly Repository $cache,
+        protected readonly bool $lock = false,
+    ) {}
 
     /**
      * @return MetricFamilySamples[]
@@ -90,19 +88,18 @@ class LaravelCacheAdapter extends InMemory
         );
     }
 
-    /**
-     * Runs the read-modify-write of one metric type, under a cache lock when locking is enabled, so that an update
-     * made by another process at the same time is not overwritten. Without a store that supports locks, or when the
-     * lock is not acquired in time, the update runs without it rather than fail the caller.
-     */
     protected function locked(string $type, Closure $update): void
     {
-        $store = $this->cache->getStore();
-
-        if (! $this->lock || ! $store instanceof LockProvider) {
+        if (! $this->lock) {
             $update();
 
             return;
+        }
+
+        $store = $this->cache->getStore();
+
+        if (! $store instanceof LockProvider) {
+            throw new InvalidArgumentException('The configured Prometheus cache store does not support locks.');
         }
 
         $lock = $store->lock($this->cacheKey($type).'_LOCK', $this->lockSeconds);
@@ -111,11 +108,7 @@ class LaravelCacheAdapter extends InMemory
             $lock->betweenBlockedAttemptsSleepFor(10);
         }
 
-        try {
-            $lock->block($this->lockWaitSeconds, $update);
-        } catch (LockTimeoutException) {
-            $update();
-        }
+        $lock->block($this->lockWaitSeconds, $update);
     }
 
     protected function fetch(string $type): array

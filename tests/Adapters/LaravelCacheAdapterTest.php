@@ -2,6 +2,8 @@
 
 use Illuminate\Cache\ArrayStore;
 use Illuminate\Cache\Repository;
+use Illuminate\Contracts\Cache\LockTimeoutException;
+use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Cache;
 use Prometheus\CollectorRegistry;
 use Prometheus\MetricFamilySamples;
@@ -44,9 +46,7 @@ it('does not collect metrics after the storage was wiped', function () {
     expect($collectingRegistry->getMetricFamilySamples())->toBeEmpty();
 });
 
-it('locks concurrent updates only when cache_lock is enabled', function (bool $lock, int $expected) {
-    // A store that lets another process write right after the first one has read the stored metrics. That process
-    // waits while a lock is held, as two processes on the same cache would, and writes at once when none is.
+it('locks concurrent updates only when cache_lock is enabled', function (string $registerMethod, string $updateMethod, string $sampleName, bool $lock, int $expected) {
     $store = new class extends ArrayStore
     {
         public ?Closure $otherProcess = null;
@@ -74,12 +74,11 @@ it('locks concurrent updates only when cache_lock is enabled', function (bool $l
         'prometheus.cache_lock' => $lock,
     ]);
 
-    $store->otherProcess = function () use ($lock) {
-        (new CollectorRegistry(new LaravelCacheAdapter(Cache::store('interleaving'), $lock), false))
-            ->getOrRegisterCounter('app', 'test_counter', 'help')->inc();
-    };
+    $write = fn (CollectorRegistry $registry, int $value) => $registry->$registerMethod('app', 'test_metric', 'help')->$updateMethod($value);
 
-    app(CollectorRegistry::class)->getOrRegisterCounter('app', 'test_counter', 'help')->inc();
+    $store->otherProcess = fn () => $write(new CollectorRegistry(new LaravelCacheAdapter(Cache::store('interleaving'), $lock), false), 7);
+
+    $write(app(CollectorRegistry::class), 3);
 
     if ($store->waiting !== null) {
         ($store->waiting)();
@@ -87,23 +86,49 @@ it('locks concurrent updates only when cache_lock is enabled', function (bool $l
 
     $samples = (new CollectorRegistry(new LaravelCacheAdapter(Cache::store('interleaving')), false))->getMetricFamilySamples();
 
-    expect($samples[0]->getSamples()[0]->getValue())->toEqual($expected);
+    $sample = collect($samples[0]->getSamples())->first(fn ($sample) => $sample->getName() === $sampleName);
+
+    expect($sample->getValue())->toEqual($expected);
 })->with([
-    'enabled' => [true, 2],
-    'disabled, the default' => [false, 1],
+    'counter' => ['getOrRegisterCounter', 'incBy', 'app_test_metric'],
+    'gauge' => ['getOrRegisterGauge', 'incBy', 'app_test_metric'],
+    'histogram' => ['getOrRegisterHistogram', 'observe', 'app_test_metric_sum'],
+    'summary' => ['getOrRegisterSummary', 'observe', 'app_test_metric_sum'],
+])->with([
+    'enabled' => [true, 10],
+    'disabled, the default' => [false, 3],
 ]);
 
-it('still updates the metric when the lock is not released in time', function () {
+it('does not write without a lock when acquisition times out', function () {
     $cache = new Repository(new ArrayStore);
-    $cache->getStore()->lock('PROMETHEUS_counter_METRICS_LOCK', 60)->get();
+    $registry = new CollectorRegistry(new LaravelCacheAdapter($cache), false);
+    $registry->getOrRegisterCounter('app', 'test_counter', 'help')->incBy(7);
+
+    $lock = $cache->getStore()->lock('PROMETHEUS_counter_METRICS_LOCK', 60);
+    $lock->get();
 
     $adapter = new class($cache, true) extends LaravelCacheAdapter
     {
         protected int $lockWaitSeconds = 0;
     };
-    (new CollectorRegistry($adapter, false))->getOrRegisterCounter('app', 'test_counter', 'help')->inc();
+    $counter = (new CollectorRegistry($adapter, false))->getOrRegisterCounter('app', 'test_counter', 'help');
+
+    expect(fn () => $counter->incBy(3))->toThrow(LockTimeoutException::class);
 
     $samples = (new CollectorRegistry(new LaravelCacheAdapter($cache), false))->getMetricFamilySamples();
 
-    expect($samples[0]->getSamples()[0]->getValue())->toEqual(1);
+    expect($samples[0]->getSamples()[0]->getValue())->toEqual(7);
+
+    $lock->release();
+    $counter->incBy(3);
+
+    expect($registry->getMetricFamilySamples()[0]->getSamples()[0]->getValue())->toEqual(10);
+});
+
+it('rejects stores without lock support when locking is enabled', function () {
+    $cache = new Repository(Mockery::mock(Store::class));
+    $registry = new CollectorRegistry(new LaravelCacheAdapter($cache, true), false);
+
+    expect(fn () => $registry->getOrRegisterCounter('app', 'test_counter', 'help')->inc())
+        ->toThrow(InvalidArgumentException::class, 'The configured Prometheus cache store does not support locks.');
 });

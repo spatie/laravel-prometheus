@@ -61,9 +61,9 @@ return [
     'cache' => null,
 
     /*
-     * When metrics are stored in a cache, update them under a cache lock, so that increments from concurrent
-     * requests, queue workers or Octane workers don't overwrite each other. Each update then takes about twice
-     * as long (two more round trips to the cache store). Needs a cache store that supports locks.
+     * Lock each metric type while updating cached metrics to prevent concurrent
+     * writers from overwriting each other. Requires a cache store with lock support.
+     * Throws if the lock cannot be acquired within 3 seconds or is unsupported.
      */
     'cache_lock' => false,
 ];
