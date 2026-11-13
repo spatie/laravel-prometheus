@@ -2,6 +2,21 @@
 
 All notable changes to `laravel-prometheus` will be documented in this file.
 
+## 1.7.2 - 2026-11-13
+
+### Fixed
+
+- Add opt-in cache locking to prevent concurrent metric writers from overwriting each other (#85, contributed by @rezsk). Enable `cache_lock` in `config/prometheus.php`; it remains disabled by default.
+- When locking is enabled, timeouts and unsupported stores fail explicitly instead of falling back to unlocked writes.
+
+All writers must share the cache and lock store, and updates must finish within the five-second lock lease. Collecting and wiping metrics is not atomic. See the concurrent-updates documentation for details.
+
+### Development
+
+- Extend the test matrix to PHP 8.6 and allow Pest 5 (#84).
+
+**Full changelog**: https://github.com/spatie/laravel-prometheus/compare/1.7.1...1.7.2
+
 ## 1.7.1 - 2026-09-28
 
 ### What's Changed
